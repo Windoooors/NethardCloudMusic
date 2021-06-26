@@ -1,4 +1,4 @@
-# NetHard Cloud Music 2.0
+# Nethard Cloud Music
 
 #### 介绍
 用于 Windows 98 及更高版本的 Windows 的第三方网易云音乐播放器。
