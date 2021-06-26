@@ -1,5 +1,5 @@
 ﻿
-namespace NetHard_Music
+namespace Setchin.NethardMusic
 {
     partial class SettingsForm
     {
@@ -50,7 +50,7 @@ namespace NetHard_Music
             this.okButton.TabIndex = 1;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // apiNoticeLabel
             // 
@@ -76,7 +76,6 @@ namespace NetHard_Music
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SettingsForm_UnLoad);
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,42 +1,62 @@
 ﻿using System;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Net;
+using Newtonsoft.Json;
 
-namespace NetHard_Music
+namespace Setchin.NethardMusic
 {
-    public class Playlist
+    public partial class Playlist : List<Song>, IEquatable<Playlist>
     {
-        public List<string> songNames = new List<string>();
-        public List<string> musicianNames = new List<string>();
-        public List<string> albumNames = new List<string>();
-        public List<long> songIds = new List<long>();
-        public string listName;
+        private readonly long _id;
+        private readonly string _name;
 
-        public void Initialize(long id, CookieContainer cookie)
+        public Playlist(long id, string name, IEnumerable<Song> songs)
         {
-            songNames = new List<string>();
-            musicianNames = new List<string>();
-            albumNames = new List<string>();
-            songIds = new List<long>();
-            JObject jObject = JObject.Parse(Request.Get(LoginForm.address + "/playlist/detail?id=" + id.ToString(), cookie));
-            JArray jArray = JArray.Parse(jObject["playlist"]["tracks"].ToString());
-            for (int i = 0; i < jArray.Count; i++)
+            _id = id;
+            _name = name;
+            AddRange(songs);
+        }
+
+        public long Id { get { return _id; } }
+
+        public string Name { get { return _name; } }
+
+        public static Playlist GetPlaylist(ApiOperator @operator, long id)
+        {
+            string content = @operator.Get("playlist/detail", new { Id = id });
+            var dto = JsonConvert.DeserializeObject<PlaylistResponseDto>(content);
+            return dto.Playlist.ToPlaylist();
+        }
+
+        public Playlist GetData(ApiOperator @operator)
+        {
+            if (Count == 0)
             {
-                songNames.Add(jArray[i]["name"].ToString());
-                string musicians = string.Empty;
-                for (int j = 0; j < JArray.Parse(jArray[i]["ar"].ToString()).Count; j++)
-                {
-                    if (j != JArray.Parse(jArray[i]["ar"].ToString()).Count - 1)
-                        musicians += JArray.Parse(jArray[i]["ar"].ToString())[j]["name"].ToString() + " & ";
-                    else
-                        musicians += JArray.Parse(jArray[i]["ar"].ToString())[j]["name"].ToString();
-                }
-                musicianNames.Add(musicians);
-                albumNames.Add(jArray[i]["al"]["name"].ToString());
-                songIds.Add(jArray[i]["id"].ToObject<long>());
+                return GetPlaylist(@operator, Id);
             }
-            listName = jObject["playlist"]["name"].ToString();
+
+            return this;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Playlist);
+        }
+
+        public bool Equals(Playlist other)
+        {
+            return other != null &&
+                   Id == other.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return 2108858624 + Id.GetHashCode();
+        }
+
+        private class PlaylistResponseDto
+        {
+            [JsonProperty("playlist")]
+            public PlaylistDto Playlist;
         }
     }
 }

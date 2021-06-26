@@ -1,5 +1,5 @@
 ﻿
-namespace NetHard_Music
+namespace Setchin.NethardMusic
 {
     partial class SearchForm
     {
@@ -79,7 +79,6 @@ namespace NetHard_Music
             this.playlistListView.TabIndex = 1;
             this.playlistListView.UseCompatibleStateImageBehavior = false;
             this.playlistListView.View = System.Windows.Forms.View.Details;
-            this.playlistListView.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.playlistListView.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // songNameColumn

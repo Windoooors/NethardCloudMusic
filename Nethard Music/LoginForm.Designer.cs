@@ -1,4 +1,4 @@
-﻿namespace NetHard_Music
+﻿namespace Setchin.NethardMusic
 {
     partial class LoginForm
     {
@@ -46,7 +46,7 @@
             this.loginButton.TabIndex = 0;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            this.loginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // loginLabel
             // 
@@ -99,7 +99,7 @@
             this.settingsButton.TabIndex = 6;
             this.settingsButton.Text = "Settings";
             this.settingsButton.UseVisualStyleBackColor = true;
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            this.settingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // LoginForm
             // 

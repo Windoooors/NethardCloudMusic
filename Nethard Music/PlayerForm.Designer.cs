@@ -1,5 +1,5 @@
 ﻿
-namespace NetHard_Music
+namespace Setchin.NethardMusic
 {
     partial class PlayerForm
     {
@@ -17,6 +17,7 @@ namespace NetHard_Music
             if (disposing && (components != null))
             {
                 components.Dispose();
+                _player.close();
             }
             base.Dispose(disposing);
         }
@@ -36,7 +37,7 @@ namespace NetHard_Music
             this.positionLabel = new System.Windows.Forms.Label();
             this.playButton = new System.Windows.Forms.Button();
             this.pauseButton = new System.Windows.Forms.Button();
-            this.lastButton = new System.Windows.Forms.Button();
+            this.prevButton = new System.Windows.Forms.Button();
             this.nextButton = new System.Windows.Forms.Button();
             this.modeButton = new System.Windows.Forms.Button();
             this.playlistListView = new System.Windows.Forms.ListView();
@@ -47,6 +48,7 @@ namespace NetHard_Music
             this.likeButton = new System.Windows.Forms.Button();
             this.progressTrackBar = new System.Windows.Forms.TrackBar();
             this.volumeTrackBar = new System.Windows.Forms.TrackBar();
+            this.artistLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.progressTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeTrackBar)).BeginInit();
@@ -56,11 +58,12 @@ namespace NetHard_Music
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.artistLabel);
             this.panel1.Controls.Add(this.songTitleLabel);
             this.panel1.Controls.Add(this.positionLabel);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(362, 85);
+            this.panel1.Size = new System.Drawing.Size(362, 122);
             this.panel1.TabIndex = 0;
             // 
             // songTitleLabel
@@ -81,7 +84,7 @@ namespace NetHard_Music
             this.positionLabel.BackColor = System.Drawing.Color.Transparent;
             this.positionLabel.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.positionLabel.ForeColor = System.Drawing.Color.Lime;
-            this.positionLabel.Location = new System.Drawing.Point(131, 60);
+            this.positionLabel.Location = new System.Drawing.Point(131, 86);
             this.positionLabel.Name = "positionLabel";
             this.positionLabel.Size = new System.Drawing.Size(87, 21);
             this.positionLabel.TabIndex = 0;
@@ -91,7 +94,7 @@ namespace NetHard_Music
             // 
             this.playButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.playButton.Image = ((System.Drawing.Image)(resources.GetObject("playButton.Image")));
-            this.playButton.Location = new System.Drawing.Point(12, 103);
+            this.playButton.Location = new System.Drawing.Point(12, 140);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(47, 41);
             this.playButton.TabIndex = 1;
@@ -102,29 +105,29 @@ namespace NetHard_Music
             // 
             this.pauseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pauseButton.Image = ((System.Drawing.Image)(resources.GetObject("pauseButton.Image")));
-            this.pauseButton.Location = new System.Drawing.Point(65, 103);
+            this.pauseButton.Location = new System.Drawing.Point(65, 140);
             this.pauseButton.Name = "pauseButton";
             this.pauseButton.Size = new System.Drawing.Size(47, 41);
             this.pauseButton.TabIndex = 2;
             this.pauseButton.UseVisualStyleBackColor = true;
             this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
             // 
-            // lastButton
+            // prevButton
             // 
-            this.lastButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lastButton.Image = ((System.Drawing.Image)(resources.GetObject("lastButton.Image")));
-            this.lastButton.Location = new System.Drawing.Point(118, 103);
-            this.lastButton.Name = "lastButton";
-            this.lastButton.Size = new System.Drawing.Size(47, 41);
-            this.lastButton.TabIndex = 3;
-            this.lastButton.UseVisualStyleBackColor = true;
-            this.lastButton.Click += new System.EventHandler(this.lastButton_Click);
+            this.prevButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.prevButton.Image = ((System.Drawing.Image)(resources.GetObject("prevButton.Image")));
+            this.prevButton.Location = new System.Drawing.Point(118, 140);
+            this.prevButton.Name = "prevButton";
+            this.prevButton.Size = new System.Drawing.Size(47, 41);
+            this.prevButton.TabIndex = 3;
+            this.prevButton.UseVisualStyleBackColor = true;
+            this.prevButton.Click += new System.EventHandler(this.prevButton_Click);
             // 
             // nextButton
             // 
             this.nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nextButton.Image = ((System.Drawing.Image)(resources.GetObject("nextButton.Image")));
-            this.nextButton.Location = new System.Drawing.Point(171, 103);
+            this.nextButton.Location = new System.Drawing.Point(171, 140);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(47, 41);
             this.nextButton.TabIndex = 4;
@@ -133,7 +136,7 @@ namespace NetHard_Music
             // 
             // modeButton
             // 
-            this.modeButton.Location = new System.Drawing.Point(327, 103);
+            this.modeButton.Location = new System.Drawing.Point(327, 140);
             this.modeButton.Name = "modeButton";
             this.modeButton.Size = new System.Drawing.Size(47, 41);
             this.modeButton.TabIndex = 5;
@@ -150,7 +153,7 @@ namespace NetHard_Music
             this.playlistListView.FullRowSelect = true;
             this.playlistListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.playlistListView.HideSelection = false;
-            this.playlistListView.Location = new System.Drawing.Point(12, 180);
+            this.playlistListView.Location = new System.Drawing.Point(12, 219);
             this.playlistListView.MultiSelect = false;
             this.playlistListView.Name = "playlistListView";
             this.playlistListView.Size = new System.Drawing.Size(362, 309);
@@ -181,7 +184,7 @@ namespace NetHard_Music
             // 
             // likeButton
             // 
-            this.likeButton.Location = new System.Drawing.Point(274, 103);
+            this.likeButton.Location = new System.Drawing.Point(274, 140);
             this.likeButton.Name = "likeButton";
             this.likeButton.Size = new System.Drawing.Size(47, 41);
             this.likeButton.TabIndex = 7;
@@ -192,7 +195,7 @@ namespace NetHard_Music
             // progressTrackBar
             // 
             this.progressTrackBar.BackColor = System.Drawing.SystemColors.Control;
-            this.progressTrackBar.Location = new System.Drawing.Point(12, 150);
+            this.progressTrackBar.Location = new System.Drawing.Point(12, 187);
             this.progressTrackBar.Name = "progressTrackBar";
             this.progressTrackBar.Size = new System.Drawing.Size(261, 45);
             this.progressTrackBar.TabIndex = 8;
@@ -204,7 +207,7 @@ namespace NetHard_Music
             // 
             // volumeTrackBar
             // 
-            this.volumeTrackBar.Location = new System.Drawing.Point(274, 150);
+            this.volumeTrackBar.Location = new System.Drawing.Point(274, 187);
             this.volumeTrackBar.Maximum = 100;
             this.volumeTrackBar.Name = "volumeTrackBar";
             this.volumeTrackBar.Size = new System.Drawing.Size(100, 45);
@@ -213,17 +216,29 @@ namespace NetHard_Music
             this.volumeTrackBar.Value = 100;
             this.volumeTrackBar.Scroll += new System.EventHandler(this.volumeTrackBar_Scroll);
             // 
+            // artistLabel
+            // 
+            this.artistLabel.AutoSize = true;
+            this.artistLabel.BackColor = System.Drawing.Color.Transparent;
+            this.artistLabel.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.artistLabel.ForeColor = System.Drawing.Color.Lime;
+            this.artistLabel.Location = new System.Drawing.Point(142, 60);
+            this.artistLabel.Name = "artistLabel";
+            this.artistLabel.Size = new System.Drawing.Size(43, 21);
+            this.artistLabel.TabIndex = 2;
+            this.artistLabel.Text = "NaN";
+            // 
             // PlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 501);
+            this.ClientSize = new System.Drawing.Size(384, 540);
             this.Controls.Add(this.playlistListView);
             this.Controls.Add(this.progressTrackBar);
             this.Controls.Add(this.likeButton);
             this.Controls.Add(this.modeButton);
             this.Controls.Add(this.nextButton);
-            this.Controls.Add(this.lastButton);
+            this.Controls.Add(this.prevButton);
             this.Controls.Add(this.pauseButton);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.panel1);
@@ -235,6 +250,7 @@ namespace NetHard_Music
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Player";
             this.Load += new System.EventHandler(this.PlayerForm_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PlayerForm_FormClosed);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.progressTrackBar)).EndInit();
@@ -246,14 +262,14 @@ namespace NetHard_Music
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        public System.Windows.Forms.Label songTitleLabel;
+        private System.Windows.Forms.Label songTitleLabel;
         private System.Windows.Forms.Label positionLabel;
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.Button pauseButton;
-        private System.Windows.Forms.Button lastButton;
+        private System.Windows.Forms.Button prevButton;
         private System.Windows.Forms.Button nextButton;
         private System.Windows.Forms.Button modeButton;
-        public System.Windows.Forms.ListView playlistListView;
+        private System.Windows.Forms.ListView playlistListView;
         private System.Windows.Forms.ColumnHeader songNameColumn;
         private System.Windows.Forms.ColumnHeader musicianNameColumn;
         private System.Windows.Forms.ColumnHeader albumNameColumn;
@@ -261,5 +277,6 @@ namespace NetHard_Music
         private System.Windows.Forms.Button likeButton;
         private System.Windows.Forms.TrackBar progressTrackBar;
         private System.Windows.Forms.TrackBar volumeTrackBar;
+        private System.Windows.Forms.Label artistLabel;
     }
 }

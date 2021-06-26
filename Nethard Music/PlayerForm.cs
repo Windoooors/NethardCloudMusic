@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using WMPLib;
 using System.Windows.Forms;
-using System.Net;
+using WMPLib;
 
-namespace NetHard_Music
+namespace Setchin.NethardMusic
 {
     public partial class PlayerForm : Form
     {
-        public CookieContainer cookie = null;
-        WindowsMediaPlayer player = new WindowsMediaPlayer();
-        public int playingPosition;
-        public List<long> songIds = new List<long>();
+        private readonly WindowsMediaPlayer _player = new WindowsMediaPlayer();
+
+        private int _index;
+
+        private Song Song { get { return (Song)playlistListView.Items[_index].Tag; } }
+
         public enum PlayMode
         {
             SingleLoop,
@@ -30,27 +28,68 @@ namespace NetHard_Music
             InitializeComponent();
         }
 
-        private void PlayerForm_Load(object sender, EventArgs e)
+        public void Play(Song song)
         {
-            songNameColumn.Width = (playlistListView.Width - 25) / 3;
-            musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
-            albumNameColumn.Width = (playlistListView.Width - 25) / 3;
-            player.settings.volume = 100;
+            bool existed = false;
+
+            for (int i = 0; i < playlistListView.Items.Count; i++)
+            {
+                if (song.Equals((Song)playlistListView.Items[i].Tag))
+                {
+                    _index = i;
+                    existed = true;
+                    break;
+                }
+            }
+
+            if (!existed)
+            {
+                AddSong(song);
+                _index = playlistListView.Items.Count - 1;
+            }
+
+            playlistListView.Items[_index].Selected = true;
+            artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
+            songTitleLabel.Text = playlistListView.Items[_index].Text;
+            Play();
         }
 
-        private void StatusChange()
+        public void SetPlaylist(Playlist playlist)
         {
+            playlistListView.Items.Clear();
 
+            foreach (var song in playlist)
+            {
+                AddSong(song);
+            }
         }
 
-        public void Play(long id)
+        private void AddSong(Song song)
+        {
+            var item = new ListViewItem() { Tag = song };
+            var artists = new List<string>();
+
+            item.Text = song.Name;
+
+            foreach (var artist in song.Artists)
+            {
+                artists.Add(artist.Name);
+            }
+
+            item.SubItems.Add(string.Join(",", artists.ToArray()));
+            item.SubItems.Add(song.Album.Name);
+
+            playlistListView.Items.Add(item);
+        }
+
+        private void Play()
         {
             try
             {
-                player.URL = "http://music.163.com/song/media/outer/url?id=" + id.ToString() + ".mp3";
-                player.controls.play();
+                _player.URL = "http://music.163.com/song/media/outer/url?id=" + Song.Id.ToString() + ".mp3";
+                _player.controls.play();
                 timer1.Enabled = true;
-                player.StatusChange += new WMPLib._WMPOCXEvents_StatusChangeEventHandler(StatusChange);
+                _player.StatusChange += new _WMPOCXEvents_StatusChangeEventHandler(StatusChange);
             }
             catch
             {
@@ -58,12 +97,25 @@ namespace NetHard_Music
             }
         }
 
+        private void PlayerForm_Load(object sender, EventArgs e)
+        {
+            songNameColumn.Width = (playlistListView.Width - 25) / 3;
+            musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
+            albumNameColumn.Width = (playlistListView.Width - 25) / 3;
+            _player.settings.volume = 100;
+        }
+
+        private void StatusChange()
+        {
+        }
+
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            Play(songIds[playlistListView.SelectedItems[0].Index]);
-            player.controls.play();
             songTitleLabel.Text = playlistListView.SelectedItems[0].Text;
-            playingPosition = playlistListView.SelectedItems[0].Index;
+            artistLabel.Text = artistLabel.Text = playlistListView.SelectedItems[0].SubItems[1].Text;
+            _index = playlistListView.SelectedItems[0].Index;
+            Play();
+            _player.controls.play();
         }
 
         private void modeButton_Click(object sender, EventArgs e)
@@ -95,7 +147,7 @@ namespace NetHard_Music
         {
             try
             {
-                switch (player.playState)
+                switch (_player.playState)
                 {
                     case WMPPlayState.wmppsStopped:
                         {
@@ -104,32 +156,19 @@ namespace NetHard_Music
                             {
                                 case PlayMode.SingleLoop:
                                     {
-                                        player.controls.play();
+                                        _player.controls.play();
                                         break;
                                     }
                                 case PlayMode.ListLoop:
                                     {
-                                        if (playingPosition != songIds.Count - 1)
-                                        {
-                                            Play(songIds[playingPosition + 1]);
-                                            songTitleLabel.Text = playlistListView.Items[playingPosition + 1].Text;
-                                            playingPosition++;
-                                        }
-                                        else
-                                        {
-                                            Play(songIds[0]);
-                                            songTitleLabel.Text = playlistListView.Items[0].Text;
-                                            playingPosition = 0;
-                                        }
+                                        Next();
                                         break;
                                     }
                                 case PlayMode.List:
                                     {
-                                        if (playingPosition != songIds.Count - 1)
+                                        if (_index != playlistListView.Items.Count - 1)
                                         {
-                                            Play(songIds[playingPosition + 1]);
-                                            songTitleLabel.Text = playlistListView.Items[playingPosition + 1].Text;
-                                            playingPosition++;
+                                            Next();
                                         }
                                         break;
                                     }
@@ -147,12 +186,12 @@ namespace NetHard_Music
                             break;
                         }
                 }
-                progressTrackBar.Maximum = (int)player.currentMedia.duration;
-                if (player.controls.currentPositionString != string.Empty)
-                    positionLabel.Text = player.controls.currentPositionString + "/" + player.currentMedia.durationString;
+                progressTrackBar.Maximum = (int)_player.currentMedia.duration;
+                if (_player.controls.currentPositionString != string.Empty)
+                    positionLabel.Text = _player.controls.currentPositionString + "/" + _player.currentMedia.durationString;
                 else
-                    positionLabel.Text = "00:00" + "/" + player.currentMedia.durationString;
-                progressTrackBar.Value = (int)player.controls.currentPosition;
+                    positionLabel.Text = "00:00" + "/" + _player.currentMedia.durationString;
+                progressTrackBar.Value = (int)_player.controls.currentPosition;
                 positionLabel.Location = new Point((panel1.Width - positionLabel.Width) / 2, positionLabel.Location.Y);
                 if (songTitleLabel.Width <= panel1.Width)
                     songTitleLabel.Location = new Point((panel1.Width - songTitleLabel.Width) / 2, songTitleLabel.Location.Y);
@@ -163,10 +202,20 @@ namespace NetHard_Music
                     else
                         songTitleLabel.Location = new Point(panel1.Width, songTitleLabel.Location.Y);
                 }
+                if (artistLabel.Width <= panel1.Width)
+                    artistLabel.Location = new Point((panel1.Width - artistLabel.Width) / 2, artistLabel.Location.Y);
+                else
+                {
+                    if (artistLabel.Location.X >= 0 - artistLabel.Width)
+                        artistLabel.Location = new Point(artistLabel.Location.X - 10, artistLabel.Location.Y);
+                    else
+                        artistLabel.Location = new Point(panel1.Width, artistLabel.Location.Y);
+                }
             }
             catch
             {
                 positionLabel.Text = "NaN" + "/" + "NaN";
+                artistLabel.Location = new Point((panel1.Width - artistLabel.Width) / 2, artistLabel.Location.Y);
                 positionLabel.Location = new Point((panel1.Width - positionLabel.Width) / 2, positionLabel.Location.Y);
                 songTitleLabel.Location = new Point((panel1.Width - songTitleLabel.Width) / 2, songTitleLabel.Location.Y);
             }
@@ -179,60 +228,72 @@ namespace NetHard_Music
 
         private void likeButton_Click(object sender, EventArgs e)
         {
-            Request.Get(LoginForm.address + "/like?id=" + songIds[playlistListView.SelectedItems[0].Index].ToString(), cookie);
+            Song.Like(Program.Operator, Song.Id);
         }
 
         private void progressTrackBar_ValueChanged(object sender, EventArgs e)
         {
-            if (player.playState == WMPPlayState.wmppsPaused || player.playState == WMPPlayState.wmppsStopped)
-                player.controls.currentPosition = progressTrackBar.Value;
+            if (_player.playState == WMPPlayState.wmppsPaused || _player.playState == WMPPlayState.wmppsStopped)
+                _player.controls.currentPosition = progressTrackBar.Value;
         }
 
         private void playButton_Click(object sender, EventArgs e)
         {
-            player.controls.play();
+            _player.controls.play();
         }
 
         private void pauseButton_Click(object sender, EventArgs e)
         {
-            player.controls.pause();
+            _player.controls.pause();
         }
 
-        private void lastButton_Click(object sender, EventArgs e)
+        private void prevButton_Click(object sender, EventArgs e)
         {
-            if (playingPosition != 0)
-            {
-                Play(songIds[playingPosition - 1]);
-                songTitleLabel.Text = playlistListView.Items[playingPosition - 1].Text;
-                playingPosition--;
-            }
-            else
-            {
-                Play(songIds[songIds.Count - 1]);
-                songTitleLabel.Text = playlistListView.Items[songIds.Count - 1].Text;
-                playingPosition = songIds.Count - 1;
-            }
+            Previous();
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
-            if (playingPosition != songIds.Count - 1)
+            Next();
+        }
+
+        private void Previous()
+        {
+            if (_index != 0)
             {
-                Play(songIds[playingPosition + 1]);
-                songTitleLabel.Text = playlistListView.Items[playingPosition + 1].Text;
-                playingPosition++;
+                songTitleLabel.Text = playlistListView.Items[--_index].Text;
+                artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
             }
             else
             {
-                Play(songIds[0]);
-                songTitleLabel.Text = playlistListView.Items[0].Text;
-                playingPosition = 0;
+                _index = playlistListView.Items.Count - 1;
+                songTitleLabel.Text = playlistListView.Items[playlistListView.Items.Count - 1].Text;
+                artistLabel.Text = playlistListView.Items[playlistListView.Items.Count - 1].SubItems[1].Text;
             }
+
+            Play();
+        }
+
+        private void Next()
+        {
+            if (_index != playlistListView.Items.Count - 1)
+            {
+                songTitleLabel.Text = playlistListView.Items[++_index].Text;
+                artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
+            }
+            else
+            {
+                _index = 0;
+                songTitleLabel.Text = playlistListView.Items[0].Text;
+                artistLabel.Text = playlistListView.Items[0].SubItems[1].Text;
+            }
+
+            Play();
         }
 
         private void volumeTrackBar_Scroll(object sender, EventArgs e)
         {
-            player.settings.volume = volumeTrackBar.Value;
+            _player.settings.volume = volumeTrackBar.Value;
         }
 
         private void progressTrackBar_Scroll(object sender, EventArgs e)
@@ -243,13 +304,18 @@ namespace NetHard_Music
         private void progressTrackBar_MouseUp(object sender, MouseEventArgs e)
         {
             timer1.Enabled = true;
-            player.controls.play();
+            _player.controls.play();
         }
 
         private void progressTrackBar_MouseDown(object sender, MouseEventArgs e)
         {
             timer1.Enabled = false;
-            player.controls.pause();
+            _player.controls.pause();
+        }
+
+        private void PlayerForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.Player = new PlayerForm();
         }
     }
 }

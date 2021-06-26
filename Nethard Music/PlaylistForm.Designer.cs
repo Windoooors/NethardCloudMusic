@@ -1,5 +1,5 @@
 ﻿
-namespace NetHard_Music
+namespace Setchin.NethardMusic
 {
     partial class PlaylistForm
     {

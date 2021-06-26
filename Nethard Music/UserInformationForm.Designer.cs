@@ -1,4 +1,4 @@
-﻿namespace NetHard_Music
+﻿namespace Setchin.NethardMusic
 {
     partial class UserInformationForm
     {
@@ -70,7 +70,6 @@
             this.playlistsListView.TabIndex = 2;
             this.playlistsListView.UseCompatibleStateImageBehavior = false;
             this.playlistsListView.View = System.Windows.Forms.View.Details;
-            this.playlistsListView.SelectedIndexChanged += new System.EventHandler(this.playLists_SelectedIndexChanged);
             this.playlistsListView.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // playlistColumn

@@ -1,18 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
-namespace NetHard_Music
+namespace Setchin.NethardMusic
 {
     public partial class UserInformationForm : Form
     {
-        public UserInformation userInformation;
-        public static PlayerForm player = new PlayerForm();
-
         public UserInformationForm()
         {
             InitializeComponent();
@@ -25,12 +17,16 @@ namespace NetHard_Music
 
         public void Intialize()
         {
-            userNameLabel.Text = userInformation.nickname;
-            for (int i = 0; i < userInformation.songListNames.Count; i++)
+            var user = Program.Operator.User;
+            userNameLabel.Text = user.Nickname;
+
+            var playlists = User.GetPlaylists(Program.Operator, user.Id);
+
+            foreach (var playlist in playlists)
             {
-                playlistsListView.Items.Add(userInformation.songListNames[i]);
+                var item = new ListViewItem(playlist.Name) { Tag = playlist };
+                playlistsListView.Items.Add(item);
             }
-            player.cookie = userInformation.savedCookie;
         }
 
         private void listView1_DoubleClick(object sender, EventArgs e)
@@ -38,8 +34,7 @@ namespace NetHard_Music
             try
             {
                 PlaylistForm playListForm = new PlaylistForm();
-                playListForm.playlist.Initialize(userInformation.songListIds[playlistsListView.SelectedItems[0].Index], userInformation.savedCookie);
-                playListForm.Initialize();
+                playListForm.Initialize((Playlist)playlistsListView.SelectedItems[0].Tag);
                 playListForm.Show();
             }
             catch
@@ -48,16 +43,10 @@ namespace NetHard_Music
             }
         }
 
-        private void playLists_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             SearchForm searchForm = new SearchForm();
             searchForm.Show();
-            searchForm.cookie = userInformation.savedCookie;
         }
 
         private void UserInformationForm_Load(object sender, EventArgs e)
