@@ -1,4 +1,4 @@
-# NetHard Cloud Music 2.0
+# Nethard Cloud Music
 
 #### Description
 A third-party NetEase Cloud Music for Windows 98 and later.
