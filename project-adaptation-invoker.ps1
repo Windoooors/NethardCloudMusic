@@ -16,9 +16,9 @@ if ($old_edited -and $new_edited)
 
 if ($old_edited)
 {
-    Invoke-Expression "$script_path 0"
+    Invoke-Expression ".\$script_path 0"
 }
 elseif ($new_edited)
 {
-    Invoke-Expression "$script_path 1"
+    Invoke-Expression ".\$script_path 1"
 }
