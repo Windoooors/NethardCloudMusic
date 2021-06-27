@@ -10,7 +10,7 @@ namespace Setchin.NethardMusic
         private readonly string _name;
         private readonly bool _hasData = false;
 
-        public Playlist(long id, string name, IEnumerable<Song> songs)
+        public Playlist(long id, string name, List<Song> songs)
         {
             _id = id;
             _name = name;

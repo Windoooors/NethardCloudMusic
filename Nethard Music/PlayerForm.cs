@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Setchin.NethardMusic.Collections;
 using WMPLib;
 
 namespace Setchin.NethardMusic
@@ -71,12 +72,7 @@ namespace Setchin.NethardMusic
 
             item.Text = song.Name;
 
-            foreach (var artist in song.Artists)
-            {
-                artists.Add(artist.Name);
-            }
-
-            item.SubItems.Add(string.Join(",", artists.ToArray()));
+            item.SubItems.Add(string.Join(",", song.Artists.Select(artist => artist.Name).ToArray()));
             item.SubItems.Add(song.Album.Name);
 
             playlistListView.Items.Add(item);

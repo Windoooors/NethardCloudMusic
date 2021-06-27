@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
+using Setchin.NethardMusic.Collections;
 
 namespace Setchin.NethardMusic
 {
@@ -18,35 +18,26 @@ namespace Setchin.NethardMusic
                 switch (searchTab.SelectedIndex)
                 {
                     case 0:
+                        playlistListView.Items.Clear();
+
+                        var songs = Song.Search(Program.Operator, searchTextBox.Text);
+
+                        foreach (var song in songs)
                         {
-                            playlistListView.Items.Clear();
+                            var item = new ListViewItem() { Tag = song };
 
-                            var songs = Song.Search(Program.Operator, searchTextBox.Text);
+                            item.Text = song.Name;
 
-                            foreach (var song in songs)
-                            {
-                                var item = new ListViewItem() { Tag = song };
-                                var artists = new List<string>();
+                            item.SubItems.Add(string.Join(",", song.Artists.Select(artist => artist.Name).ToArray()));
+                            item.SubItems.Add(song.Album.Name);
 
-                                item.Text = song.Name;
-
-                                foreach (var artist in song.Artists)
-                                {
-                                    artists.Add(artist.Name);
-                                }
-
-                                item.SubItems.Add(string.Join(",", artists.ToArray()));
-                                item.SubItems.Add(song.Album.Name);
-
-                                playlistListView.Items.Add(item);
-                            }
-
-                            break;
+                            playlistListView.Items.Add(item);
                         }
+
+                        break;
+
                     case 1:
-                        {
-                            break;
-                        }
+                        break;
                 }
             }
             else

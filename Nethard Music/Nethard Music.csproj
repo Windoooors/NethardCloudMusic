@@ -53,6 +53,10 @@
     <Compile Include="Album.cs" />
     <Compile Include="ApiOperator.cs" />
     <Compile Include="Artist.cs" />
+    <Compile Include="Collections\Array.cs" />
+    <Compile Include="Collections\Enumerate.cs" />
+    <Compile Include="ExtensionAttribute.cs" />
+    <Compile Include="Func.cs" />
     <Compile Include="IdNameDto.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
