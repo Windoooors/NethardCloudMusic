@@ -19,10 +19,12 @@ namespace Setchin.NethardMusic
 
         public Playlist ToPlaylist()
         {
-            var songs = new List<Song>();
+            var songs = (List<Song>)null;
 
             if (Tracks != null)
             {
+                songs = new List<Song>();
+
                 foreach (var track in Tracks)
                 {
                     var artists = new List<Artist>();

@@ -8,17 +8,25 @@ namespace Setchin.NethardMusic
     {
         private readonly long _id;
         private readonly string _name;
+        private readonly bool _hasData = false;
 
         public Playlist(long id, string name, IEnumerable<Song> songs)
         {
             _id = id;
             _name = name;
-            AddRange(songs);
+
+            if (songs != null)
+            {
+                AddRange(songs);
+                _hasData = true;
+            }
         }
 
         public long Id { get { return _id; } }
 
         public string Name { get { return _name; } }
+
+        public bool HasData { get { return _hasData; } }
 
         public static Playlist GetPlaylist(ApiOperator @operator, long id)
         {
@@ -29,7 +37,7 @@ namespace Setchin.NethardMusic
 
         public Playlist GetData(ApiOperator @operator)
         {
-            if (Count == 0)
+            if (!_hasData)
             {
                 return GetPlaylist(@operator, Id);
             }
