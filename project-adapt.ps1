@@ -1,5 +1,5 @@
 param([int]$action)
-$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = "Stop"
 
 $proj_dir = "Nethard Music"
 $old_proj_path = "$proj_dir\Nethard Music-vs2008.csproj"
