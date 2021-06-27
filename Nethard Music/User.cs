@@ -6,8 +6,8 @@ namespace Setchin.NethardMusic
 {
     public class User : IEquatable<User>
     {
-        private long _id;
-        private string _nickname;
+        private readonly long _id;
+        private readonly string _nickname;
 
         public User(long id, string nickname)
         {

@@ -4,8 +4,8 @@ namespace Setchin.NethardMusic
 {
     public class Album : IEquatable<Album>
     {
-        private long _id;
-        private string _name;
+        private readonly long _id;
+        private readonly string _name;
 
         public Album(long id, string name)
         {
