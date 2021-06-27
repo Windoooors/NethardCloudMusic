@@ -10,7 +10,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     
-    - run: git diff-tree --no-commit-id --name-only -r HEAD
+    - run: git diff-tree --no-commit-id --name-only -r HEAD~0
 
     - name: Adaptation
       shell: pwsh
