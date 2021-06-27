@@ -2,7 +2,7 @@ name: project-adapt
 on: [push]
 
 jobs:
-  adaptation:
+  adapt:
 
     runs-on: windows-latest
 
