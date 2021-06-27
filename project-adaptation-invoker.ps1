@@ -3,7 +3,6 @@ $old_proj_path = "$proj_dir/Nethard Music-vs2008.csproj"
 $new_proj_path = "$proj_dir/Nethard Music.csproj"
 
 $script_path = "project-adaptation.ps1"
-Write-Host (git diff-tree --no-commit-id --name-only -r HEAD)
 
 $diff = git diff-tree --no-commit-id --name-only -r HEAD
 
