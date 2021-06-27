@@ -13,7 +13,7 @@
 （Visual Studio 需为 Visual Studio 2008 或更新版本）
 
 ## 贡献者
-- Windoors ([@Windoooors](https://github.com/Windoooors))
+- Setchin ([@Windoooors](https://github.com/Windoooors))
 - Ricky8955555 ([@ricky8955555](https://github.com/ricky8955555))
 
 ## 编写代码
