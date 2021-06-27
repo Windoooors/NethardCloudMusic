@@ -11,7 +11,7 @@
     <RootNamespace>Setchin.NethardMusic</RootNamespace>
     <AssemblyName>Setchin.NethardMusic</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <LangVersion>3.0</LangVersion>
+    <LangVersion>Default</LangVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
