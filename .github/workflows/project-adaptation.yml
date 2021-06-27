@@ -12,11 +12,11 @@ jobs:
       with:
         fetch-depth: 2
 
-    - run: git diff-tree --no-commit-id --name-only -r HEAD
-
     - name: Adaptation
       shell: pwsh
       run: .\project-adaptation-invoker.ps1
 
     - name: Push
       uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
