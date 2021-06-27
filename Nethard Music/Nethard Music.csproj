@@ -53,10 +53,6 @@
     <Compile Include="Album.cs" />
     <Compile Include="ApiOperator.cs" />
     <Compile Include="Artist.cs" />
-    <Compile Include="Collections\Array.cs" />
-    <Compile Include="Collections\Enumerate.cs" />
-    <Compile Include="ExtensionAttribute.cs" />
-    <Compile Include="Func.cs" />
     <Compile Include="IdNameDto.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -64,7 +60,13 @@
     <Compile Include="LoginForm.designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LyricParser.cs" />
+    <Compile Include="LyricParserDto.cs" />
     <Compile Include="Md5Computing.cs" />
+    <Compile Include="Collections\Array.cs" />
+    <Compile Include="Collections\Enumerate.cs" />
+    <Compile Include="ExtensionAttribute.cs" />
+    <Compile Include="Func.cs" />
     <Compile Include="PlayerForm.cs">
       <SubType>Form</SubType>
     </Compile>

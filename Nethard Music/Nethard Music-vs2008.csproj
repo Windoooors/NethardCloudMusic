@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -64,166 +63,10 @@
     <Compile Include="LyricParser.cs" />
     <Compile Include="LyricParserDto.cs" />
     <Compile Include="Md5Computing.cs" />
-    <Compile Include="PlayerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PlayerForm.designer.cs">
-      <DependentUpon>PlayerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Playlist.cs" />
-    <Compile Include="PlaylistDto.cs" />
-    <Compile Include="PlaylistForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PlaylistForm.designer.cs">
-      <DependentUpon>PlaylistForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PlayerForm.resx">
-      <DependentUpon>PlayerForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PlaylistForm.resx">
-      <DependentUpon>PlaylistForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SearchForm.resx">
-      <DependentUpon>SearchForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserInformationForm.resx">
-      <DependentUpon>UserInformationForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="SearchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SearchForm.designer.cs">
-      <DependentUpon>SearchForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SettingsForm.designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Song.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserInformationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UserInformationForm.Designer.cs">
-      <DependentUpon>UserInformationForm.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="stdole">
-      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-=======
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{768F04DD-F3A3-409D-A5CF-9CE98089C519}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Setchin.NethardMusic</RootNamespace>
-    <AssemblyName>Setchin.NethardMusic</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <LangVersion>Default</LangVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WMPLib.1.0.0\lib\AxInterop.WMPLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WMPLib.1.0.0\lib\Interop.WMPLib.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net20\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Album.cs" />
-    <Compile Include="ApiOperator.cs" />
-    <Compile Include="Artist.cs" />
     <Compile Include="Collections\Array.cs" />
     <Compile Include="Collections\Enumerate.cs" />
     <Compile Include="ExtensionAttribute.cs" />
     <Compile Include="Func.cs" />
-    <Compile Include="IdNameDto.cs" />
-    <Compile Include="LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LoginForm.designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Md5Computing.cs" />
     <Compile Include="PlayerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -316,7 +159,6 @@
     </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
->>>>>>> f7224541103f46aad02bb4f279baa08c7de8f5f5
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
