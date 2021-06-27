@@ -60,6 +60,8 @@
     <Compile Include="LoginForm.designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LyricParser.cs" />
+    <Compile Include="LyricParserDto.cs" />
     <Compile Include="Md5Computing.cs" />
     <Compile Include="PlayerForm.cs">
       <SubType>Form</SubType>

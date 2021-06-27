@@ -1,4 +1,4 @@
-name: project-adapt
+name: project-adaptation
 on: [push]
 
 jobs:
@@ -12,9 +12,9 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Adapt
+    - name: Adaptation
       shell: pwsh
-      run: .\project-adapt-invoker.ps1
+      run: .\project-adaptation-invoker.ps1
 
     - name: Commit
       continue-on-error: true

@@ -53,5 +53,10 @@ namespace Setchin.NethardMusic
         {
             playlistColumn.Width = playlistsListView.Width - 25;
         }
+
+        private void playlistsListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

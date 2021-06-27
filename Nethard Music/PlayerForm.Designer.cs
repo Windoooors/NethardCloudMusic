@@ -33,6 +33,7 @@ namespace Setchin.NethardMusic
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlayerForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.artistLabel = new System.Windows.Forms.Label();
             this.songTitleLabel = new System.Windows.Forms.Label();
             this.positionLabel = new System.Windows.Forms.Label();
             this.playButton = new System.Windows.Forms.Button();
@@ -48,7 +49,7 @@ namespace Setchin.NethardMusic
             this.likeButton = new System.Windows.Forms.Button();
             this.progressTrackBar = new System.Windows.Forms.TrackBar();
             this.volumeTrackBar = new System.Windows.Forms.TrackBar();
-            this.artistLabel = new System.Windows.Forms.Label();
+            this.lyricListBox = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.progressTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeTrackBar)).BeginInit();
@@ -65,6 +66,18 @@ namespace Setchin.NethardMusic
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(362, 122);
             this.panel1.TabIndex = 0;
+            // 
+            // artistLabel
+            // 
+            this.artistLabel.AutoSize = true;
+            this.artistLabel.BackColor = System.Drawing.Color.Transparent;
+            this.artistLabel.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.artistLabel.ForeColor = System.Drawing.Color.Lime;
+            this.artistLabel.Location = new System.Drawing.Point(142, 60);
+            this.artistLabel.Name = "artistLabel";
+            this.artistLabel.Size = new System.Drawing.Size(43, 21);
+            this.artistLabel.TabIndex = 2;
+            this.artistLabel.Text = "NaN";
             // 
             // songTitleLabel
             // 
@@ -216,23 +229,21 @@ namespace Setchin.NethardMusic
             this.volumeTrackBar.Value = 100;
             this.volumeTrackBar.Scroll += new System.EventHandler(this.volumeTrackBar_Scroll);
             // 
-            // artistLabel
+            // lyricListBox
             // 
-            this.artistLabel.AutoSize = true;
-            this.artistLabel.BackColor = System.Drawing.Color.Transparent;
-            this.artistLabel.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.artistLabel.ForeColor = System.Drawing.Color.Lime;
-            this.artistLabel.Location = new System.Drawing.Point(142, 60);
-            this.artistLabel.Name = "artistLabel";
-            this.artistLabel.Size = new System.Drawing.Size(43, 21);
-            this.artistLabel.TabIndex = 2;
-            this.artistLabel.Text = "NaN";
+            this.lyricListBox.FormattingEnabled = true;
+            this.lyricListBox.ItemHeight = 12;
+            this.lyricListBox.Location = new System.Drawing.Point(380, 12);
+            this.lyricListBox.Name = "lyricListBox";
+            this.lyricListBox.Size = new System.Drawing.Size(371, 520);
+            this.lyricListBox.TabIndex = 10;
             // 
             // PlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 540);
+            this.ClientSize = new System.Drawing.Size(763, 540);
+            this.Controls.Add(this.lyricListBox);
             this.Controls.Add(this.playlistListView);
             this.Controls.Add(this.progressTrackBar);
             this.Controls.Add(this.likeButton);
@@ -278,5 +289,6 @@ namespace Setchin.NethardMusic
         private System.Windows.Forms.TrackBar progressTrackBar;
         private System.Windows.Forms.TrackBar volumeTrackBar;
         private System.Windows.Forms.Label artistLabel;
+        private System.Windows.Forms.ListBox lyricListBox;
     }
 }

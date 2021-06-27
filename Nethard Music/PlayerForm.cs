@@ -12,12 +12,19 @@ namespace Setchin.NethardMusic
 
         private int _index;
 
+        private int _previousIndex;
+
+        private int _lyricPosition = 0;
+
         private Song Song { get { return (Song)playlistListView.Items[_index].Tag; } }
+
+        private LyricParser _lyricParser = new LyricParser();
 
         public enum PlayMode
         {
             SingleLoop,
             ListLoop,
+            Random,
             List
         }
 
@@ -51,7 +58,20 @@ namespace Setchin.NethardMusic
             playlistListView.Items[_index].Selected = true;
             artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
             songTitleLabel.Text = playlistListView.Items[_index].Text;
+
+            _lyricParser.GetLyric(song.Id);
+            InitializeLyric();
             Play();
+        }
+
+        public void InitializeLyric()
+        {
+            lyricListBox.Items.Clear();
+            _lyricPosition = 0;
+            for (int i = 0; i < _lyricParser.content.Count; i++)
+            {
+                lyricListBox.Items.Add(_lyricParser.content[i]);
+            }
         }
 
         public void SetPlaylist(Playlist playlist)
@@ -114,6 +134,8 @@ namespace Setchin.NethardMusic
             songTitleLabel.Text = playlistListView.SelectedItems[0].Text;
             artistLabel.Text = artistLabel.Text = playlistListView.SelectedItems[0].SubItems[1].Text;
             _index = playlistListView.SelectedItems[0].Index;
+            _lyricParser.GetLyric(Song.Id);
+            InitializeLyric();
             Play();
             _player.controls.play();
         }
@@ -130,6 +152,12 @@ namespace Setchin.NethardMusic
                     }
                 case PlayMode.ListLoop:
                     {
+                        playMode = PlayMode.Random;
+                        modeButton.Text = "随机播放";
+                        break;
+                    }
+                case PlayMode.Random:
+                    {
                         playMode = PlayMode.List;
                         modeButton.Text = "列表播放";
                         break;
@@ -145,6 +173,7 @@ namespace Setchin.NethardMusic
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            lyricListBox.SelectedIndex = _lyricPosition;
             try
             {
                 switch (_player.playState)
@@ -162,6 +191,11 @@ namespace Setchin.NethardMusic
                                 case PlayMode.ListLoop:
                                     {
                                         Next();
+                                        break;
+                                    }
+                                case PlayMode.Random:
+                                    {
+                                        Random();
                                         break;
                                     }
                                 case PlayMode.List:
@@ -234,7 +268,20 @@ namespace Setchin.NethardMusic
         private void progressTrackBar_ValueChanged(object sender, EventArgs e)
         {
             if (_player.playState == WMPPlayState.wmppsPaused || _player.playState == WMPPlayState.wmppsStopped)
+            {
                 _player.controls.currentPosition = progressTrackBar.Value;
+            }
+            for (int i = 0; i < _lyricParser.time.Count; i++)
+            {
+                if (i != _lyricParser.time.Count - 1)
+                {
+                    if (_lyricParser.time[i] < _player.controls.currentPosition && _lyricParser.time[i + 1] > _player.controls.currentPosition)
+                    {
+                        _lyricPosition = i;
+                        break;
+                    }
+                }
+            }
         }
 
         private void playButton_Click(object sender, EventArgs e)
@@ -257,6 +304,27 @@ namespace Setchin.NethardMusic
             Next();
         }
 
+        private void Random() 
+        {
+            Random randomIndex = new Random();
+            _previousIndex = _index;
+            _index = randomIndex.Next(0, playlistListView.Items.Count - 1);
+
+            if (_previousIndex != _index)
+            {
+                artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
+                songTitleLabel.Text = playlistListView.Items[_index].Text;
+
+                _lyricParser.GetLyric(Song.Id);
+                InitializeLyric();
+                Play();
+            }
+            else
+            {
+                Random();
+            }
+        }
+
         private void Previous()
         {
             if (_index != 0)
@@ -271,6 +339,8 @@ namespace Setchin.NethardMusic
                 artistLabel.Text = playlistListView.Items[playlistListView.Items.Count - 1].SubItems[1].Text;
             }
 
+            _lyricParser.GetLyric(Song.Id);
+            InitializeLyric();
             Play();
         }
 
@@ -288,6 +358,8 @@ namespace Setchin.NethardMusic
                 artistLabel.Text = playlistListView.Items[0].SubItems[1].Text;
             }
 
+            _lyricParser.GetLyric(Song.Id);
+            InitializeLyric();
             Play();
         }
 
