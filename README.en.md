@@ -22,4 +22,4 @@ A third-party NetEase Cloud Music for Windows 98 and later.
 3. If your computer is equipped with the Visual Studio of which version between *Visual Studio 2008* and *Visual Studio 2019*, you can open the solution file "**Nethard Music-vs2008.sln**", and update the solution file and project file through *Visual Studio* builtin tool. **(Not Recommanded)**
 
 ## Contributing
-Everyone is welcomed to contribute to this project. You can tell us some deficiencies of the program by **Issue**, moreover, you can contribute codes by **Pull Request** if you are capable.
+Everyone is welcomed to contribute to this project. You can tell us some suggestions by **Issue**. Moreover, we will appreciate if you could contribute codes by **Pull Request**.
