@@ -1,0 +1,19 @@
+name: project-adaptation
+on: [push]
+
+jobs:
+  adaptation:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Adaptation
+      shell: pwsh
+      run: .\project-adaptation-invoker.ps1
+
+    - name: Push
+      shell: pwsh
+      run: git commit -m "adapt project." -a
