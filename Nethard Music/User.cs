@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using Setchin.NethardMusic.Collections;
 
 namespace Setchin.NethardMusic
 {
@@ -20,14 +20,7 @@ namespace Setchin.NethardMusic
             string content = @operator.Get("user/playlist", new { Uid = userId });
             var dtos = JsonConvert.DeserializeObject<PlaylistsResponseDto>(content).Playlists;
 
-            var playlists = new List<Playlist>();
-
-            foreach (var dto in dtos)
-            {
-                playlists.Add(dto.ToPlaylist());
-            }
-
-            return playlists.ToArray();
+            return dtos.Select(dto => dto.ToPlaylist()).ToArray();
         }
 
         public override bool Equals(object obj)

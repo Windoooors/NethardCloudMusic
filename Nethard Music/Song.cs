@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using Setchin.NethardMusic.Collections;
 
 namespace Setchin.NethardMusic
 {
@@ -24,21 +24,11 @@ namespace Setchin.NethardMusic
             string content = @operator.Get("search", new { Keywords = keywords, Type = 1 });
             var dtos = JsonConvert.DeserializeObject<SearchResponseDto>(content).Result.Songs;
 
-            var songs = new List<Song>();
-
-            foreach (var dto in dtos)
-            {
-                var artists = new List<Artist>();
-
-                foreach (var artist in dto.Artists)
-                {
-                    artists.Add(new Artist(artist.Id, artist.Name));
-                }
-
-                songs.Add(new Song(dto.Id, dto.Name, artists.ToArray(), new Album(dto.Album.Id, dto.Album.Name)));
-            }
-
-            return songs.ToArray();
+            return dtos.Select(dto => new Song(dto.Id,
+                dto.Name,
+                dto.Artists.Select(artist => new Artist(artist.Id, artist.Name)).ToArray(),
+                new Album(dto.Album.Id, dto.Album.Name)))
+                .ToArray();
         }
 
         public static void Like(ApiOperator @operator, long id)

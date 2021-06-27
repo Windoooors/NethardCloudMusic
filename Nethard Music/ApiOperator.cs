@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using Setchin.NethardMusic.Collections;
 
 namespace Setchin.NethardMusic
 {
@@ -74,14 +74,11 @@ namespace Setchin.NethardMusic
                 throw new ArgumentNullException("obj");
             }
 
-            var properties = new List<string>();
-
-            foreach (var property in obj.GetType().GetProperties())
-            {
-                properties.Add(ToUnderScoreCase(property.Name) + "=" + Uri.EscapeDataString(property.GetValue(obj, null).ToString()));
-            }
-
-            return string.Join("&", properties.ToArray());
+            return string.Join("&", obj.GetType().GetProperties().Select(prop =>
+                {
+                    object value = prop.GetValue(obj, null);
+                    return Uri.EscapeDataString(ToUnderScoreCase(prop.Name)) + "=" + Uri.EscapeDataString(value == null ? "null" : value.ToString());
+                }).ToArray());
         }
 
         private static string ToUnderScoreCase(string str)

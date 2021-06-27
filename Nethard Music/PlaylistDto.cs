@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Setchin.NethardMusic.Collections;
 
 namespace Setchin.NethardMusic
 {
@@ -19,23 +20,16 @@ namespace Setchin.NethardMusic
 
         public Playlist ToPlaylist()
         {
-            var songs = (List<Song>)null;
+            List<Song> songs = null;
 
             if (Tracks != null)
             {
-                songs = new List<Song>();
-
-                foreach (var track in Tracks)
-                {
-                    var artists = new List<Artist>();
-
-                    foreach (var artist in track.Artists)
-                    {
-                        artists.Add(new Artist(artist.Id, artist.Name));
-                    }
-
-                    songs.Add(new Song(track.Id, track.Name, artists.ToArray(), new Album(track.Album.Id, track.Album.Name)));
-                }
+                songs = Tracks.Select(track => new Song(
+                    track.Id,
+                    track.Name,
+                    track.Artists.Select(artist => new Artist(artist.Id, artist.Name)).ToArray(),
+                    new Album(track.Album.Id, track.Album.Name)))
+                    .ToList();
             }
 
             return new Playlist(Id, Name, songs);
