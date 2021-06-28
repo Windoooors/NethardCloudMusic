@@ -204,6 +204,7 @@ namespace Setchin.NethardMusic
                     case WMPPlayState.wmppsPlaying:
                         {
                             progressTrackBar.Enabled = true;
+                            lyricListBox.SelectedIndex = _lyricController.GetPosition(_player.controls.currentPosition);
                             break;
                         }
                 }
@@ -232,8 +233,6 @@ namespace Setchin.NethardMusic
                     else
                         artistLabel.Location = new Point(panel1.Width, artistLabel.Location.Y);
                 }
-
-                lyricListBox.SelectedIndex = _lyricController.GetPosition(_player.controls.currentPosition);
             }
             catch
             {
