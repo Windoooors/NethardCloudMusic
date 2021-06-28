@@ -1,10 +1,28 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Setchin.NethardMusic.Collections
 {
-    internal static class Enumerate
+    internal static class Enumerates
     {
+        public static IEnumerable<TResult> Cast<TResult>(this IEnumerable enumerable)
+        {
+            if (enumerable == null)
+            {
+                throw new ArgumentNullException("enumerable");
+            }
+
+            var result = enumerable as IEnumerable<TResult>;
+
+            if (result != null)
+            {
+                return result;
+            }
+
+            return CastIterator<TResult>(enumerable);
+        }
+
         public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> enumerable, Func<TSource, TResult> func)
         {
             if (enumerable == null)
@@ -17,12 +35,9 @@ namespace Setchin.NethardMusic.Collections
                 throw new ArgumentNullException("func");
             }
 
-            using (var enumerator = enumerable.GetEnumerator())
+            foreach (var item in enumerable)
             {
-                while (enumerator.MoveNext())
-                {
-                    yield return func.Invoke(enumerator.Current);
-                }
+                yield return func.Invoke(item);
             }
         }
 
@@ -65,7 +80,7 @@ namespace Setchin.NethardMusic.Collections
 
                 if (count == 0)
                 {
-                    return Array.Empty<T>();
+                    return Arrays.Empty<T>();
                 }
 
                 var array = new T[count];
@@ -92,6 +107,42 @@ namespace Setchin.NethardMusic.Collections
             }
 
             return new List<T>(enumerable);
+        }
+
+        public static IEnumerable<T> Skip<T>(this IEnumerable<T> enumerable, int count)
+        {
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    if (--count < 0)
+                    {
+                        yield return enumerator.Current;
+                    }
+                }
+            }
+        }
+
+        public static IEnumerable<T> Take<T>(this IEnumerable<T> enumerable, int count)
+        {
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    if (--count >= 0)
+                    {
+                        yield return enumerator.Current;
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<TResult> CastIterator<TResult>(IEnumerable enumerable)
+        {
+            foreach (var item in enumerable)
+            {
+                yield return (TResult)item;
+            }
         }
 
         private struct ArrayBuilder<T>
@@ -125,7 +176,7 @@ namespace Setchin.NethardMusic.Collections
             {
                 if (Count == 0)
                 {
-                    return Array.Empty<T>();
+                    return Arrays.Empty<T>();
                 }
 
                 var result = _array;
@@ -150,9 +201,9 @@ namespace Setchin.NethardMusic.Collections
                         int newCapacity = capacity * 2;
                         newCapacity = Math.Max(newCapacity, minimum);
 
-                        if ((uint)newCapacity > (uint)Array.MaxLength)
+                        if ((uint)newCapacity > (uint)Arrays.MaxLength)
                         {
-                            newCapacity = Array.MaxLength;
+                            newCapacity = Arrays.MaxLength;
                         }
 
                         var array = new T[newCapacity];

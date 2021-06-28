@@ -1,6 +1,6 @@
 ﻿namespace Setchin.NethardMusic.Collections
 {
-    internal static class Array
+    internal static class Arrays
     {
         public static readonly int MaxLength = 0X7FFFFFC7;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Kfstorm.LrcParser;
 using Newtonsoft.Json;
 using Setchin.NethardMusic.Collections;
 
@@ -34,6 +35,14 @@ namespace Setchin.NethardMusic
         public static void Like(ApiOperator @operator, long id)
         {
             @operator.Get("like", new { Id = id });
+        }
+
+        public static ILrc GetLyric(ApiOperator @operator, long id)
+        {
+            string content = @operator.Get("lyric", new { Id = id });
+            var dto = JsonConvert.DeserializeObject<LyricResponseDto>(content);
+
+            return Lrc.FromText(dto.Lrc.Lyric);
         }
 
         public override bool Equals(object obj)
@@ -78,6 +87,18 @@ namespace Setchin.NethardMusic
                     [JsonProperty("album")]
                     public IdNameDto Album;
                 }
+            }
+        }
+
+        private class LyricResponseDto
+        {
+            [JsonProperty("lrc")]
+            public LrcDto Lrc;
+
+            public class LrcDto
+            {
+                [JsonProperty("lyric")]
+                public string Lyric;
             }
         }
     }

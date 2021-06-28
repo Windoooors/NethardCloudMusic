@@ -12,14 +12,10 @@ namespace Setchin.NethardMusic
         private readonly WindowsMediaPlayer _player = new WindowsMediaPlayer();
 
         private int _index;
-
         private int _previousIndex;
-
-        private int _lyricPosition = 0;
+        private LyricController _lyricController = new LyricController();
 
         private Song Song { get { return (Song)playlistListView.Items[_index].Tag; } }
-
-        private LyricParser _lyricParser = new LyricParser();
 
         public enum PlayMode
         {
@@ -60,19 +56,16 @@ namespace Setchin.NethardMusic
             artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
             songTitleLabel.Text = playlistListView.Items[_index].Text;
 
-            _lyricParser.GetLyric(song.Id);
-            InitializeLyric();
-            Play();
+            InitializeSong();
         }
 
         public void InitializeLyric()
         {
+            var lyric = Song.GetLyric(Program.Operator, Song.Id);
+
             lyricListBox.Items.Clear();
-            _lyricPosition = 0;
-            for (int i = 0; i < _lyricParser.content.Count; i++)
-            {
-                lyricListBox.Items.Add(_lyricParser.content[i]);
-            }
+            lyricListBox.Items.AddRange(lyric.Lyrics.Select(line => line.Content).ToArray());
+            _lyricController.Initialize(lyric.Lyrics);
         }
 
         public void SetPlaylist(Playlist playlist)
@@ -98,11 +91,12 @@ namespace Setchin.NethardMusic
             playlistListView.Items.Add(item);
         }
 
-        private void Play()
+        private void InitializeSong()
         {
             try
             {
                 _player.URL = "http://music.163.com/song/media/outer/url?id=" + Song.Id.ToString() + ".mp3";
+                InitializeLyric();
                 _player.controls.play();
                 timer1.Enabled = true;
                 _player.StatusChange += new _WMPOCXEvents_StatusChangeEventHandler(StatusChange);
@@ -130,10 +124,8 @@ namespace Setchin.NethardMusic
             songTitleLabel.Text = playlistListView.SelectedItems[0].Text;
             artistLabel.Text = artistLabel.Text = playlistListView.SelectedItems[0].SubItems[1].Text;
             _index = playlistListView.SelectedItems[0].Index;
-            _lyricParser.GetLyric(Song.Id);
-            InitializeLyric();
-            Play();
-            _player.controls.play();
+
+            InitializeSong();
         }
 
         private void modeButton_Click(object sender, EventArgs e)
@@ -169,7 +161,6 @@ namespace Setchin.NethardMusic
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            lyricListBox.SelectedIndex = _lyricPosition;
             try
             {
                 switch (_player.playState)
@@ -241,6 +232,8 @@ namespace Setchin.NethardMusic
                     else
                         artistLabel.Location = new Point(panel1.Width, artistLabel.Location.Y);
                 }
+
+                lyricListBox.SelectedIndex = _lyricController.GetPosition(_player.controls.currentPosition);
             }
             catch
             {
@@ -267,17 +260,6 @@ namespace Setchin.NethardMusic
             {
                 _player.controls.currentPosition = progressTrackBar.Value;
             }
-            for (int i = 0; i < _lyricParser.time.Count; i++)
-            {
-                if (i != _lyricParser.time.Count - 1)
-                {
-                    if (_lyricParser.time[i] < _player.controls.currentPosition && _lyricParser.time[i + 1] > _player.controls.currentPosition)
-                    {
-                        _lyricPosition = i;
-                        break;
-                    }
-                }
-            }
         }
 
         private void playButton_Click(object sender, EventArgs e)
@@ -300,20 +282,18 @@ namespace Setchin.NethardMusic
             Next();
         }
 
-        private void Random() 
+        private void Random()
         {
-            Random randomIndex = new Random();
+            var random = new Random();
             _previousIndex = _index;
-            _index = randomIndex.Next(0, playlistListView.Items.Count - 1);
+            _index = random.Next(0, playlistListView.Items.Count - 1);
 
             if (_previousIndex != _index)
             {
                 artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
                 songTitleLabel.Text = playlistListView.Items[_index].Text;
 
-                _lyricParser.GetLyric(Song.Id);
-                InitializeLyric();
-                Play();
+                InitializeSong();
             }
             else
             {
@@ -335,9 +315,7 @@ namespace Setchin.NethardMusic
                 artistLabel.Text = playlistListView.Items[playlistListView.Items.Count - 1].SubItems[1].Text;
             }
 
-            _lyricParser.GetLyric(Song.Id);
-            InitializeLyric();
-            Play();
+            InitializeSong();
         }
 
         private void Next()
@@ -354,9 +332,7 @@ namespace Setchin.NethardMusic
                 artistLabel.Text = playlistListView.Items[0].SubItems[1].Text;
             }
 
-            _lyricParser.GetLyric(Song.Id);
-            InitializeLyric();
-            Play();
+            InitializeSong();
         }
 
         private void volumeTrackBar_Scroll(object sender, EventArgs e)
