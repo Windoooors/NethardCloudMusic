@@ -9,6 +9,8 @@ namespace Setchin.NethardMusic
 {
     public partial class PlayerForm : Form
     {
+        private static readonly Random Random = new Random();
+
         private readonly WindowsMediaPlayer _player = new WindowsMediaPlayer();
 
         private int _index;
@@ -182,7 +184,7 @@ namespace Setchin.NethardMusic
                                     }
                                 case PlayMode.Random:
                                     {
-                                        Random();
+                                        RandomNext();
                                         break;
                                     }
                                 case PlayMode.List:
@@ -281,11 +283,10 @@ namespace Setchin.NethardMusic
             Next();
         }
 
-        private void Random()
+        private void RandomNext()
         {
-            var random = new Random();
             _previousIndex = _index;
-            _index = random.Next(0, playlistListView.Items.Count - 1);
+            _index = Random.Next(0, playlistListView.Items.Count - 1);
 
             if (_previousIndex != _index)
             {
@@ -296,7 +297,7 @@ namespace Setchin.NethardMusic
             }
             else
             {
-                Random();
+                RandomNext();
             }
         }
 
