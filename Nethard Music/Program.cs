@@ -22,7 +22,12 @@ namespace Setchin.NethardMusic
 
             Player = new PlayerForm();
 
-            Application.Run(new LoginForm());
+            new LoginForm().ShowDialog();
+
+            var mainForm = new MainForm();
+            mainForm.Initialize();
+
+            Application.Run(mainForm);
         }
 
         private static void InitializeOperator()

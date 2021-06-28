@@ -16,11 +16,7 @@ namespace Setchin.NethardMusic
             try
             {
                 Program.Operator.Login(phoneNumberTextBox.Text, passwordTextBox.Text);
-
-                var userInformationForm = new UserInformationForm();
-                userInformationForm.Intialize();
-                userInformationForm.Show();
-                Visible = false;
+                Close();
             }
             catch (Exception ex)
             {
@@ -31,13 +27,8 @@ namespace Setchin.NethardMusic
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
-            SettingsForm settingsForm = new SettingsForm();
+            var settingsForm = new SettingsForm();
             settingsForm.ShowDialog();
-        }
-
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
