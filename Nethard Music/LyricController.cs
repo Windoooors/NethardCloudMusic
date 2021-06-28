@@ -13,7 +13,7 @@ namespace Setchin.NethardMusic
         public LyricController()
         {
         }
-
+        
         public void Initialize(IEnumerable<IOneLineLyric> lyric)
         {
             _lyric = lyric;
@@ -54,16 +54,16 @@ namespace Setchin.NethardMusic
 
             foreach (var line in lyric)
             {
-                if (lastOffset < offset && (lastOffset = line.Timestamp.TotalSeconds) > offset)
+                if ((lastOffset < offset || index == 0) && (lastOffset = line.Timestamp.TotalSeconds) > offset)
                 {
-                    return content != null;
+                    break;
                 }
 
                 content = line.Content;
                 index++;
             }
 
-            return false;
+            return content != null;
         }
     }
 }
