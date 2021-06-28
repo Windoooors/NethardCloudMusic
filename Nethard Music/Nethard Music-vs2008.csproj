@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -60,11 +60,17 @@
     <Compile Include="LoginForm.designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LyricParser.cs" />
-    <Compile Include="LyricParserDto.cs" />
+    <Compile Include="LrcParser\ILrc.cs" />
+    <Compile Include="LrcParser\ILrcMetadata.cs" />
+    <Compile Include="LrcParser\IOneLineLyric.cs" />
+    <Compile Include="LrcParser\Lrc.cs" />
+    <Compile Include="LrcParser\LrcMetadata.cs" />
+    <Compile Include="LrcParser\OneLineLyric.cs" />
+    <Compile Include="LrcParser\OneLineLyricComparer.cs" />
+    <Compile Include="LyricController.cs" />
     <Compile Include="Md5Computing.cs" />
-    <Compile Include="Collections\Array.cs" />
-    <Compile Include="Collections\Enumerate.cs" />
+    <Compile Include="Collections\Arrays.cs" />
+    <Compile Include="Collections\Enumerates.cs" />
     <Compile Include="ExtensionAttribute.cs" />
     <Compile Include="Func.cs" />
     <Compile Include="PlayerForm.cs">
