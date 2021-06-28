@@ -12,9 +12,30 @@ jobs:
       with:
         fetch-depth: 2
 
+    - name: Create "old" Flag
+      on: 
+        push:
+          paths:
+            - 'Nethard Music/Nethard Music-vs2008.csproj'
+      shell: pwsh
+      run: .\project-file-checker.ps1 0
+
+    - name: Create "new" Flag
+      on: 
+        push:
+          paths:
+            - 'Nethard Music/Nethard Music-vs2008.csproj'
+      shell: pwsh
+      run: .\project-file-checker.ps1 1
+
     - name: Adapt
       shell: pwsh
       run: .\project-adapt-invoker.ps1
+
+    - name: Flag Clear
+      continue-on-error: true
+      shell: pwsh
+      run: .\project-file-checker.ps1 2
 
     - name: Commit
       continue-on-error: true
