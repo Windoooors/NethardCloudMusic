@@ -16,6 +16,7 @@ namespace Setchin.NethardMusic
         public void Initialize(IEnumerable<IOneLineLyric> lyric)
         {
             _lyric = lyric.ToArray();
+            _index = 0;
         }
 
         public int GetPosition(double offset)
