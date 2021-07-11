@@ -40,7 +40,7 @@ namespace Setchin.NethardMusic
             {
                 double stop = _lyric[_index + 1].Timestamp.TotalSeconds;
 
-                if (offset > start && offset < stop)
+                if (offset >= start && offset < stop)
                 {
                     return;
                 }
@@ -64,10 +64,19 @@ namespace Setchin.NethardMusic
                     lyric = lyric.Skip(_index);
                 }
             }
-            
+
             if (offset < start)
             {
+                if (_index == 0)
+                {
+                    return;
+                }
+
                 _index = 0;
+            }
+            else if (offset > start && _index == length)
+            {
+                return;
             }
 
             double lastOffset = 0;
