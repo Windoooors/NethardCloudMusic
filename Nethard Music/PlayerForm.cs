@@ -40,7 +40,7 @@ namespace Setchin.NethardMusic
 
             int i = 0;
 
-            foreach (var item in playlistListView.Items.Cast<Song>())
+            foreach (var item in playlistListView.Items.Cast<ListViewItem>().Select(item => item.Tag).Cast<Song>())
             {
                 if (song.Equals(item))
                 {
