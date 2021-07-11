@@ -38,14 +38,18 @@ namespace Setchin.NethardMusic
         {
             bool existed = false;
 
-            for (int i = 0; i < playlistListView.Items.Count; i++)
+            int i = 0;
+
+            foreach (var item in playlistListView.Items.Cast<Song>())
             {
-                if (song.Equals((Song)playlistListView.Items[i].Tag))
+                if (song.Equals(item))
                 {
                     _index = i;
                     existed = true;
                     break;
                 }
+
+                i++;
             }
 
             if (!existed)
