@@ -363,3 +363,6 @@ FodyWeavers.xsd
 
 # .DS_Store File
 .DS_Store
+
+# Workstation folder
+.workstation

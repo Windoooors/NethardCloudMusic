@@ -6,7 +6,8 @@ namespace Setchin.NethardMusic
 {
     public class LyricController
     {
-        private IEnumerable<IOneLineLyric> _lyric;
+        private IOneLineLyric[] _lyric;
+        private int _index = 0;
 
         public LyricController()
         {
@@ -14,47 +15,80 @@ namespace Setchin.NethardMusic
         
         public void Initialize(IEnumerable<IOneLineLyric> lyric)
         {
-            _lyric = lyric;
+            _lyric = lyric.ToArray();
         }
 
         public int GetPosition(double offset)
         {
-            int index;
-            string content;
-
-            TryGetLine(_lyric, offset, out index, out content);
-
-            return index;
+            UpdateState(offset);
+            return _index;
         }
 
         public string GetLine(double offset)
         {
-            int index;
-            string content;
-
-            TryGetLine(_lyric, offset, out index, out content);
-
-            return content;
+            UpdateState(offset);
+            return _lyric[_index].Content;
         }
 
-        private static bool TryGetLine(IEnumerable<IOneLineLyric> lyric, double offset, out int index, out string content)
+        private void UpdateState(double offset)
         {
-            index = -1;
-            content = null;
+            int length = _lyric.Length - 1;
+            double start = _lyric[_index].Timestamp.TotalSeconds;
+
+            if (_index < length - 1)
+            {
+                double stop = _lyric[_index + 1].Timestamp.TotalSeconds;
+
+                if (offset > start && offset < stop)
+                {
+                    return;
+                }
+            }
+
+            IEnumerable<IOneLineLyric> lyric = _lyric;
+
+            if (_index < length - 2)
+            {
+                double stop = _lyric[_index + 1].Timestamp.TotalSeconds;
+                double nextStop = _lyric[_index + 2].Timestamp.TotalSeconds;
+
+                if (offset > stop && offset < nextStop)
+                {
+                    _index++;
+                    return;
+                }
+
+                if (offset > nextStop)
+                {
+                    lyric = lyric.Skip(_index);
+                }
+            }
+            
+            if (offset < start)
+            {
+                _index = 0;
+            }
+
             double lastOffset = 0;
+
+            int index = _index;
 
             foreach (var line in lyric)
             {
-                if ((lastOffset < offset || index == 0) && (lastOffset = line.Timestamp.TotalSeconds) > offset)
+                double currentOffset = line.Timestamp.TotalSeconds;
+
+                if (offset >= lastOffset && offset < currentOffset)
                 {
-                    break;
+                    _index = index;
+                    return;
                 }
 
-                content = line.Content;
+                lastOffset = currentOffset;
+
                 index++;
             }
 
-            return content != null;
+            _index = length;
         }
     }
 }
