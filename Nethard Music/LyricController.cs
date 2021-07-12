@@ -46,14 +46,14 @@ namespace Setchin.NethardMusic
                 }
             }
 
-            IEnumerable<IOneLineLyric> lyric = _lyric;
+            int count = 0;
 
             if (_index < length - 2)
             {
                 double stop = _lyric[_index + 1].Timestamp.TotalSeconds;
                 double nextStop = _lyric[_index + 2].Timestamp.TotalSeconds;
 
-                if (offset > stop && offset < nextStop)
+                if (offset >= stop && offset < nextStop)
                 {
                     _index++;
                     return;
@@ -61,9 +61,10 @@ namespace Setchin.NethardMusic
 
                 if (offset > nextStop)
                 {
-                    lyric = lyric.Skip(_index);
+                    count = _index;
                 }
             }
+
 
             if (offset < start)
             {
@@ -71,8 +72,6 @@ namespace Setchin.NethardMusic
                 {
                     return;
                 }
-
-                _index = 0;
             }
             else if (offset > start && _index == length)
             {
@@ -80,22 +79,26 @@ namespace Setchin.NethardMusic
             }
 
             double lastOffset = 0;
+            int index = -1;
 
-            int index = _index;
+            var enumerator = ((IEnumerable<IOneLineLyric>)_lyric).GetEnumerator();
 
-            foreach (var line in lyric)
+            while (enumerator.MoveNext())
             {
-                double currentOffset = line.Timestamp.TotalSeconds;
+                if (++index <= count)
+                {
+                    continue;
+                }
+
+                double currentOffset = enumerator.Current.Timestamp.TotalSeconds;
 
                 if (offset >= lastOffset && offset < currentOffset)
                 {
-                    _index = index;
+                    _index = index - 1;
                     return;
                 }
 
                 lastOffset = currentOffset;
-
-                index++;
             }
 
             _index = length;
