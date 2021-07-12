@@ -85,7 +85,7 @@ namespace Setchin.NethardMusic
 
             while (enumerator.MoveNext())
             {
-                if (++index <= count)
+                if (++index < count)
                 {
                     continue;
                 }
@@ -94,7 +94,7 @@ namespace Setchin.NethardMusic
 
                 if (offset >= lastOffset && offset < currentOffset)
                 {
-                    _index = index - 1;
+                    _index = index == 0 ? 0 : index - 1;
                     return;
                 }
 

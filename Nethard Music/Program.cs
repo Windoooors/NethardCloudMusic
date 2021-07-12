@@ -24,6 +24,11 @@ namespace Setchin.NethardMusic
 
             new LoginForm().ShowDialog();
 
+            if (Operator.User == null)
+            {
+                return;
+            }
+
             var mainForm = new MainForm();
             mainForm.Initialize();
 
