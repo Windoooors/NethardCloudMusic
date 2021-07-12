@@ -98,7 +98,12 @@ namespace Setchin.NethardMusic
                 }
             }
 
-            return builder.ToString().TrimStart('_');
+            if (builder[0] == '_')
+            {
+                builder.Remove(0, 1);
+            }
+
+            return builder.ToString();
         }
 
         private string PostCore(string url, string content)
