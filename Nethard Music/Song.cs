@@ -42,7 +42,12 @@ namespace Setchin.NethardMusic
             string content = @operator.Get("lyric", new { Id = id });
             var dto = JsonConvert.DeserializeObject<LyricResponseDto>(content);
 
-            return Lrc.FromText(dto.Lrc.Lyric);
+            if (dto.Lrc != null && dto.Lrc.Lyric != string.Empty)
+                return Lrc.FromText(dto.Lrc.Lyric);
+            else 
+            {
+                return Lrc.FromText("[00:00.00]该歌曲没有歌词");
+            }
         }
 
         public override bool Equals(object obj)

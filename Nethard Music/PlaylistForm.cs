@@ -20,6 +20,15 @@ namespace Setchin.NethardMusic
             albumNameColumn.Width = (playlistListView.Width - 25) / 3;
         }
 
+        private void PlaylistForm_Resize(object sender, EventArgs e)
+        {
+            songNameColumn.Width = (playlistListView.Width - 25) / 3;
+            musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
+            albumNameColumn.Width = (playlistListView.Width - 25) / 3;
+            playlistListView.Width = this.Width - 30;
+            playlistListView.Height = this.Height - 61;
+        }
+
         public void Initialize(Playlist playlist)
         {
             playlistListView.Items.Clear();

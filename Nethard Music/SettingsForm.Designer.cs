@@ -37,28 +37,28 @@ namespace Setchin.NethardMusic
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 34);
+            this.textBox1.Location = new System.Drawing.Point(12, 30);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(303, 21);
             this.textBox1.TabIndex = 0;
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(243, 63);
+            this.okButton.Location = new System.Drawing.Point(240, 57);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 1;
-            this.okButton.Text = "OK";
+            this.okButton.Text = "确定";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // apiNoticeLabel
             // 
             this.apiNoticeLabel.AutoSize = true;
-            this.apiNoticeLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.apiNoticeLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.apiNoticeLabel.Location = new System.Drawing.Point(12, 15);
             this.apiNoticeLabel.Name = "apiNoticeLabel";
-            this.apiNoticeLabel.Size = new System.Drawing.Size(248, 16);
+            this.apiNoticeLabel.Size = new System.Drawing.Size(185, 12);
             this.apiNoticeLabel.TabIndex = 2;
             this.apiNoticeLabel.Text = "Netease Cloud Music Api 地址：";
             // 
@@ -66,7 +66,7 @@ namespace Setchin.NethardMusic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 98);
+            this.ClientSize = new System.Drawing.Size(327, 94);
             this.Controls.Add(this.apiNoticeLabel);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.textBox1);

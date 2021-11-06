@@ -67,6 +67,12 @@
     <Compile Include="LrcParser\LrcMetadata.cs" />
     <Compile Include="LrcParser\OneLineLyric.cs" />
     <Compile Include="LrcParser\OneLineLyricComparer.cs" />
+    <Compile Include="LyricBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LyricBox.Designer.cs">
+      <DependentUpon>LyricBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="LyricController.cs" />
     <Compile Include="Md5Computing.cs" />
     <Compile Include="Collections\Arrays.cs" />
@@ -91,6 +97,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LyricBox.resx">
+      <DependentUpon>LyricBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PlayerForm.resx">

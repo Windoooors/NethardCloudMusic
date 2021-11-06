@@ -15,9 +15,7 @@ namespace Setchin.NethardMusic
         {
             if (searchTextBox.Text != string.Empty)
             {
-                switch (searchTab.SelectedIndex)
-                {
-                    case 0:
+
                         playlistListView.Items.Clear();
 
                         var songs = Song.Search(Program.Operator, searchTextBox.Text);
@@ -34,11 +32,7 @@ namespace Setchin.NethardMusic
                             playlistListView.Items.Add(item);
                         }
 
-                        break;
 
-                    case 1:
-                        break;
-                }
             }
             else
                 MessageBox.Show("搜了个寂寞");
@@ -55,6 +49,17 @@ namespace Setchin.NethardMusic
             songNameColumn.Width = (playlistListView.Width - 25) / 3;
             musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
             albumNameColumn.Width = (playlistListView.Width - 25) / 3;
+        }
+
+        private void SearchForm_Resize(object sender, EventArgs e)
+        {
+            songNameColumn.Width = (playlistListView.Width - 25) / 3;
+            musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
+            albumNameColumn.Width = (playlistListView.Width - 25) / 3;
+            searchButton.Left = this.Width - 20 - searchButton.Width;
+            searchTextBox.Width = searchButton.Left - 20;
+            playlistListView.Height = this.Height - 80;
+            playlistListView.Width = this.Width - 32;
         }
     }
 }

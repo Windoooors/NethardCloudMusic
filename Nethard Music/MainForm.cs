@@ -13,7 +13,7 @@ namespace Setchin.NethardMusic
         public void Initialize()
         {
             var user = Program.Operator.User;
-            userNameLabel.Text = user.Nickname;
+            userNameLabel.Text = "»¶Ó­Äú£¬" + user.Nickname;
 
             var playlists = User.GetPlaylists(Program.Operator, user.Id);
 
@@ -26,16 +26,16 @@ namespace Setchin.NethardMusic
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 PlaylistForm playListForm = new PlaylistForm();
                 playListForm.Initialize((Playlist)playlistsListView.SelectedItems[0].Tag);
                 playListForm.Show();
-            }
+            /*}
             catch
             {
                 MessageBox.Show("Çë¼ì²éÍøÂç»ò Netease Cloud Music Api µØÖ·ÉèÖÃ");
-            }
+            }*/
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -49,9 +49,33 @@ namespace Setchin.NethardMusic
             playlistColumn.Width = playlistsListView.Width - 25;
         }
 
+        private void UserInformationForm_Resize(object sender, EventArgs e)
+        {
+            playlistColumn.Width = playlistsListView.Width - 25;
+            playlistsListView.Width = this.Width - 30;
+            playlistsListView.Height = this.Height - 110;
+        }
+
+
         private void playlistsListView_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void userNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ËÑË÷ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SearchForm searchForm = new SearchForm();
+            searchForm.Show();
+        }
+
+        private void ÍË³öToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

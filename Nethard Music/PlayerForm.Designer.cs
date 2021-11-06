@@ -49,10 +49,16 @@ namespace Setchin.NethardMusic
             this.likeButton = new System.Windows.Forms.Button();
             this.progressTrackBar = new System.Windows.Forms.TrackBar();
             this.volumeTrackBar = new System.Windows.Forms.TrackBar();
-            this.lyricListBox = new System.Windows.Forms.ListBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lyricBox1 = new Setchin.NethardMusic.LyricBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.progressTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeTrackBar)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -62,9 +68,9 @@ namespace Setchin.NethardMusic
             this.panel1.Controls.Add(this.artistLabel);
             this.panel1.Controls.Add(this.songTitleLabel);
             this.panel1.Controls.Add(this.positionLabel);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(10, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(362, 122);
+            this.panel1.Size = new System.Drawing.Size(360, 122);
             this.panel1.TabIndex = 0;
             // 
             // artistLabel
@@ -107,7 +113,7 @@ namespace Setchin.NethardMusic
             // 
             this.playButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.playButton.Image = ((System.Drawing.Image)(resources.GetObject("playButton.Image")));
-            this.playButton.Location = new System.Drawing.Point(12, 140);
+            this.playButton.Location = new System.Drawing.Point(10, 140);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(47, 41);
             this.playButton.TabIndex = 1;
@@ -118,7 +124,7 @@ namespace Setchin.NethardMusic
             // 
             this.pauseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pauseButton.Image = ((System.Drawing.Image)(resources.GetObject("pauseButton.Image")));
-            this.pauseButton.Location = new System.Drawing.Point(65, 140);
+            this.pauseButton.Location = new System.Drawing.Point(63, 140);
             this.pauseButton.Name = "pauseButton";
             this.pauseButton.Size = new System.Drawing.Size(47, 41);
             this.pauseButton.TabIndex = 2;
@@ -129,7 +135,7 @@ namespace Setchin.NethardMusic
             // 
             this.prevButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.prevButton.Image = ((System.Drawing.Image)(resources.GetObject("prevButton.Image")));
-            this.prevButton.Location = new System.Drawing.Point(118, 140);
+            this.prevButton.Location = new System.Drawing.Point(116, 140);
             this.prevButton.Name = "prevButton";
             this.prevButton.Size = new System.Drawing.Size(47, 41);
             this.prevButton.TabIndex = 3;
@@ -140,7 +146,7 @@ namespace Setchin.NethardMusic
             // 
             this.nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nextButton.Image = ((System.Drawing.Image)(resources.GetObject("nextButton.Image")));
-            this.nextButton.Location = new System.Drawing.Point(171, 140);
+            this.nextButton.Location = new System.Drawing.Point(169, 140);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(47, 41);
             this.nextButton.TabIndex = 4;
@@ -149,7 +155,7 @@ namespace Setchin.NethardMusic
             // 
             // modeButton
             // 
-            this.modeButton.Location = new System.Drawing.Point(327, 140);
+            this.modeButton.Location = new System.Drawing.Point(323, 140);
             this.modeButton.Name = "modeButton";
             this.modeButton.Size = new System.Drawing.Size(47, 41);
             this.modeButton.TabIndex = 5;
@@ -166,10 +172,10 @@ namespace Setchin.NethardMusic
             this.playlistListView.FullRowSelect = true;
             this.playlistListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.playlistListView.HideSelection = false;
-            this.playlistListView.Location = new System.Drawing.Point(12, 219);
+            this.playlistListView.Location = new System.Drawing.Point(0, 3);
             this.playlistListView.MultiSelect = false;
             this.playlistListView.Name = "playlistListView";
-            this.playlistListView.Size = new System.Drawing.Size(362, 309);
+            this.playlistListView.Size = new System.Drawing.Size(352, 279);
             this.playlistListView.TabIndex = 6;
             this.playlistListView.UseCompatibleStateImageBehavior = false;
             this.playlistListView.View = System.Windows.Forms.View.Details;
@@ -197,7 +203,7 @@ namespace Setchin.NethardMusic
             // 
             // likeButton
             // 
-            this.likeButton.Location = new System.Drawing.Point(274, 140);
+            this.likeButton.Location = new System.Drawing.Point(270, 140);
             this.likeButton.Name = "likeButton";
             this.likeButton.Size = new System.Drawing.Size(47, 41);
             this.likeButton.TabIndex = 7;
@@ -208,9 +214,9 @@ namespace Setchin.NethardMusic
             // progressTrackBar
             // 
             this.progressTrackBar.BackColor = System.Drawing.SystemColors.Control;
-            this.progressTrackBar.Location = new System.Drawing.Point(12, 187);
+            this.progressTrackBar.Location = new System.Drawing.Point(10, 187);
             this.progressTrackBar.Name = "progressTrackBar";
-            this.progressTrackBar.Size = new System.Drawing.Size(261, 45);
+            this.progressTrackBar.Size = new System.Drawing.Size(254, 42);
             this.progressTrackBar.TabIndex = 8;
             this.progressTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.progressTrackBar.ValueChanged += new System.EventHandler(this.progressTrackBar_ValueChanged);
@@ -220,31 +226,63 @@ namespace Setchin.NethardMusic
             // 
             // volumeTrackBar
             // 
-            this.volumeTrackBar.Location = new System.Drawing.Point(274, 187);
+            this.volumeTrackBar.Location = new System.Drawing.Point(270, 187);
             this.volumeTrackBar.Maximum = 100;
             this.volumeTrackBar.Name = "volumeTrackBar";
-            this.volumeTrackBar.Size = new System.Drawing.Size(100, 45);
+            this.volumeTrackBar.Size = new System.Drawing.Size(100, 42);
             this.volumeTrackBar.TabIndex = 9;
             this.volumeTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.volumeTrackBar.Value = 100;
             this.volumeTrackBar.Scroll += new System.EventHandler(this.volumeTrackBar_Scroll);
             // 
-            // lyricListBox
+            // tabControl1
             // 
-            this.lyricListBox.FormattingEnabled = true;
-            this.lyricListBox.ItemHeight = 12;
-            this.lyricListBox.Location = new System.Drawing.Point(380, 12);
-            this.lyricListBox.Name = "lyricListBox";
-            this.lyricListBox.Size = new System.Drawing.Size(371, 520);
-            this.lyricListBox.TabIndex = 10;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(10, 219);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(360, 307);
+            this.tabControl1.TabIndex = 12;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.playlistListView);
+            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(352, 282);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "播放列表";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.lyricBox1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(352, 282);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "歌词";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lyricBox1
+            // 
+            this.lyricBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lyricBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lyricBox1.Location = new System.Drawing.Point(0, 3);
+            this.lyricBox1.Name = "lyricBox1";
+            this.lyricBox1.Size = new System.Drawing.Size(352, 279);
+            this.lyricBox1.TabIndex = 11;
+            this.lyricBox1.Load += new System.EventHandler(this.lyricBox1_Load);
             // 
             // PlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 540);
-            this.Controls.Add(this.lyricListBox);
-            this.Controls.Add(this.playlistListView);
+            this.ClientSize = new System.Drawing.Size(381, 538);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.progressTrackBar);
             this.Controls.Add(this.likeButton);
             this.Controls.Add(this.modeButton);
@@ -254,18 +292,21 @@ namespace Setchin.NethardMusic
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.volumeTrackBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(389, 565);
             this.Name = "PlayerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Player";
             this.Load += new System.EventHandler(this.PlayerForm_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PlayerForm_FormClosed);
+            this.Resize += new System.EventHandler(this.PlayerForm_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.progressTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeTrackBar)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,6 +330,9 @@ namespace Setchin.NethardMusic
         private System.Windows.Forms.TrackBar progressTrackBar;
         private System.Windows.Forms.TrackBar volumeTrackBar;
         private System.Windows.Forms.Label artistLabel;
-        private System.Windows.Forms.ListBox lyricListBox;
+        private LyricBox lyricBox1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

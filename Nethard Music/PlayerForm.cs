@@ -69,8 +69,7 @@ namespace Setchin.NethardMusic
         {
             var lyric = Song.GetLyric(Program.Operator, Song.Id);
 
-            lyricListBox.Items.Clear();
-            lyricListBox.Items.AddRange(lyric.Lyrics.Select(line => line.Content).ToArray());
+            lyricBox1.Initialize(lyric.Lyrics.Select(line => line.Content).ToArray());
             _lyricController.Initialize(lyric.Lyrics);
         }
 
@@ -119,6 +118,24 @@ namespace Setchin.NethardMusic
             musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
             albumNameColumn.Width = (playlistListView.Width - 25) / 3;
             _player.settings.volume = 100;
+        }
+
+        private void PlayerForm_Resize(object sender, EventArgs e)
+        {
+            songNameColumn.Width = (playlistListView.Width - 25) / 3;
+            musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
+            albumNameColumn.Width = (playlistListView.Width - 25) / 3;
+            _player.settings.volume = 100;
+            panel1.Width = this.Width - 29;
+            tabControl1.Width = this.Width - 29;
+            tabControl1.Height = this.Height - 258;
+            progressTrackBar.Width = this.Width - 135;
+            volumeTrackBar.Left = this.Width - volumeTrackBar.Width - 12;
+            likeButton.Left = this.Width - likeButton.Width - 19;
+            modeButton.Left = likeButton.Left - 12 - modeButton.Width;
+            playlistListView.Width = this.Width - 37;
+            playlistListView.Height = this.Height - 286;
+            lyricBox1.Size = playlistListView.Size;
         }
 
         private void StatusChange()
@@ -210,7 +227,7 @@ namespace Setchin.NethardMusic
                     case WMPPlayState.wmppsPlaying:
                         {
                             progressTrackBar.Enabled = true;
-                            lyricListBox.SelectedIndex = _lyricController.GetPosition(_player.controls.currentPosition);
+                            lyricBox1.Update(_lyricController.GetPosition(_player.controls.currentPosition));
                             break;
                         }
                 }
@@ -364,6 +381,11 @@ namespace Setchin.NethardMusic
         private void PlayerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.Player = new PlayerForm();
+        }
+
+        private void lyricBox1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

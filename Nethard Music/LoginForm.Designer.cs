@@ -40,34 +40,34 @@
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(265, 126);
+            this.loginButton.Location = new System.Drawing.Point(265, 122);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(75, 21);
             this.loginButton.TabIndex = 0;
-            this.loginButton.Text = "Login";
+            this.loginButton.Text = "登录";
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // loginLabel
             // 
             this.loginLabel.AutoSize = true;
-            this.loginLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginLabel.Location = new System.Drawing.Point(12, 8);
+            this.loginLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginLabel.Location = new System.Drawing.Point(12, 14);
             this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(96, 37);
+            this.loginLabel.Size = new System.Drawing.Size(29, 12);
             this.loginLabel.TabIndex = 1;
-            this.loginLabel.Text = "Login";
+            this.loginLabel.Text = "登录";
             // 
             // phoneNumberTextBox
             // 
-            this.phoneNumberTextBox.Location = new System.Drawing.Point(15, 66);
+            this.phoneNumberTextBox.Location = new System.Drawing.Point(14, 56);
             this.phoneNumberTextBox.Name = "phoneNumberTextBox";
             this.phoneNumberTextBox.Size = new System.Drawing.Size(325, 21);
             this.phoneNumberTextBox.TabIndex = 2;
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(15, 102);
+            this.passwordTextBox.Location = new System.Drawing.Point(14, 95);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(325, 21);
@@ -76,28 +76,28 @@
             // phoneNumberLabel
             // 
             this.phoneNumberLabel.AutoSize = true;
-            this.phoneNumberLabel.Location = new System.Drawing.Point(12, 51);
+            this.phoneNumberLabel.Location = new System.Drawing.Point(12, 41);
             this.phoneNumberLabel.Name = "phoneNumberLabel";
-            this.phoneNumberLabel.Size = new System.Drawing.Size(149, 12);
+            this.phoneNumberLabel.Size = new System.Drawing.Size(65, 12);
             this.phoneNumberLabel.TabIndex = 4;
-            this.phoneNumberLabel.Text = "Enter your phone number.";
+            this.phoneNumberLabel.Text = "手机号码：";
             // 
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(12, 87);
+            this.passwordLabel.Location = new System.Drawing.Point(12, 80);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(125, 12);
+            this.passwordLabel.Size = new System.Drawing.Size(41, 12);
             this.passwordLabel.TabIndex = 5;
-            this.passwordLabel.Text = "Enter your password.";
+            this.passwordLabel.Text = "密码：";
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(265, 8);
+            this.settingsButton.Location = new System.Drawing.Point(265, 14);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(75, 23);
+            this.settingsButton.Size = new System.Drawing.Size(75, 24);
             this.settingsButton.TabIndex = 6;
-            this.settingsButton.Text = "Settings";
+            this.settingsButton.Text = "登录选项";
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
@@ -105,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(352, 158);
+            this.ClientSize = new System.Drawing.Size(348, 152);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.phoneNumberLabel);
@@ -118,7 +118,7 @@
             this.MaximizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Login";
+            this.Text = "登录";
             this.ResumeLayout(false);
             this.PerformLayout();
 
