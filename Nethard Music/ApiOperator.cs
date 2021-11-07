@@ -56,9 +56,15 @@ namespace Setchin.NethardMusic
             _baseUrl = baseUrl;
         }
 
-        public string Post(string path, string content)
+        public string Post(string path, object content)
         {
-            return PostCore(new UriBuilder(_baseUrl) { Path = path }.Uri.AbsoluteUri, content);
+            if (content == null)
+            {
+                throw new ArgumentNullException("content");
+            }
+
+            string postableContent = ToUriQueryString(content);
+            return PostCore(new UriBuilder(_baseUrl) { Path = path }.Uri.AbsoluteUri, postableContent);
         }
 
         public string Get(string path, object content)

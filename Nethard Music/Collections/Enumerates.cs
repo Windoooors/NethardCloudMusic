@@ -127,12 +127,25 @@ namespace Setchin.NethardMusic.Collections
         {
             using (var enumerator = enumerable.GetEnumerator())
             {
-                while (enumerator.MoveNext())
+                return TakeIterator(enumerator, count);
+            }
+        }
+
+        public static IEnumerable<IEnumerable<T>> Slice<T>(this IEnumerable<T> enumerable, int size)
+        {
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                yield return TakeIterator(enumerator, size);
+            }
+        }
+
+        private static IEnumerable<T> TakeIterator<T>(IEnumerator<T> enumerator, int count)
+        {
+            while (enumerator.MoveNext())
+            {
+                if (--count >= 0)
                 {
-                    if (--count >= 0)
-                    {
-                        yield return enumerator.Current;
-                    }
+                    yield return enumerator.Current;
                 }
             }
         }

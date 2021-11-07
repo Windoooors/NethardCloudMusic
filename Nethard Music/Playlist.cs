@@ -34,52 +34,12 @@ namespace Setchin.NethardMusic
             var firstDto = JsonConvert.DeserializeObject<PlaylistResponseDto>(content);
             string postContent = string.Empty;
 
-            foreach (PlaylistDto.TrackIdDto trackIdDto in firstDto.Playlist.TrackIds) {
-                postContent += trackIdDto.id + ",";
-            }
-            postContent = postContent.Substring(0, postContent.Length - 1);
-            List<string> partedPostContents = new List<string>();
-            int a = (int)Math.Floor((decimal)(postContent.Split(',').Length / 300));
-            if (a >= 1)
-            {
-                for (int i = 0; i < a; i++)
-                {
-                    var b = "ids=";
-                    if (i + 1 <= a)
-                    {
-                        for (int j = i * 300; j < (i + 1) * 300; j++)
-                        {
-                            b += postContent.Split(',')[j] + ",";
-                        }
-                        b = b.Substring(0, b.Length - 1);
-                    }
-                    else
-                    {
-                        for (int j = a * 300; j < postContent.Split(',').Length; j++)
-                        {
-                            b += postContent.Split(',')[j] + ",";
-                        }
-                        b = b.Substring(0, b.Length - 1);
-                    }
-                    partedPostContents.Add(@operator.Post("song/detail", b));
-                }
-            }
-            else 
-            {
-                var b = "ids=";
-                for (int j = 0; j < postContent.Split(',').Length; j++)
-                {
-                    b += postContent.Split(',')[j] + ",";
-                }
-                b = b.Substring(0, b.Length - 1);
-                partedPostContents.Add(@operator.Post("song/detail", b));
-            }
+            var tracks = new List<SonglistDto.TrackDto>();
 
-            List<SonglistDto.TrackDto> tracks = new List<SonglistDto.TrackDto>();
-
-            foreach (string c in partedPostContents)
+            foreach (var ids in firstDto.Playlist.TrackIds.Select(it => it.Id.ToString()).Slice(300))
             {
-                tracks.AddRange(JsonConvert.DeserializeObject<SonglistDto>(c).Tracks);
+                string result = @operator.Post("song/detail", new { Ids = string.Join(",", ids.ToArray()) });
+                tracks.AddRange(JsonConvert.DeserializeObject<SonglistDto>(result).Tracks);
             }
 
             List<Song> songs = null;

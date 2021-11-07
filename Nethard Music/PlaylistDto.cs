@@ -23,7 +23,7 @@ namespace Setchin.NethardMusic
 
         public class TrackIdDto {
             [JsonProperty("id")]
-            public string id;
+            public int Id;
         }
 
         public Playlist ToPlaylist()
