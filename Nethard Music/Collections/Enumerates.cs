@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Newtonsoft.Json.Serialization;
 
 namespace Setchin.NethardMusic.Collections
 {
@@ -21,6 +23,28 @@ namespace Setchin.NethardMusic.Collections
             }
 
             return CastIterator<TResult>(enumerable);
+        }
+
+        public static int Count<T>(this IEnumerable<T> enumerable)
+        {
+            var collection = enumerable as ICollection<T>;
+
+            if (collection != null)
+            {
+                return collection.Count;
+            }
+
+            int count = 0;
+
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    ++count;
+                }
+            }
+
+            return count;
         }
 
         public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> enumerable, Func<TSource, TResult> func)
@@ -131,22 +155,18 @@ namespace Setchin.NethardMusic.Collections
             }
         }
 
-        public static IEnumerable<IEnumerable<T>> Slice<T>(this ICollection<T> collection, int size)
+        public static IEnumerable<IEnumerable<T>> Slice<T>(this IEnumerable<T> enumerable, int size)
         {
-            using (var enumerator = collection.GetEnumerator())
-            {
-                int count = (int)Math.Ceiling((double)collection.Count / size);
+            int count = enumerable.Count();
+            int sliceCount = (count / size) + (count % size == 0 ? 0 : 1);
 
-                while (count-- > 0)
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                while (sliceCount-- > 0)
                 {
                     yield return TakeIterator(enumerator, size);
                 }
             }
-        }
-
-        public static IEnumerable<IEnumerable<T>> Slice<T>(this IEnumerable<T> enumerable, int size)
-        {
-            return Slice(enumerable.ToList(), size);
         }
 
         private static IEnumerable<T> TakeIterator<T>(IEnumerator<T> enumerator, int count)
