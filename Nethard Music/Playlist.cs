@@ -40,25 +40,38 @@ namespace Setchin.NethardMusic
             postContent = postContent.Substring(0, postContent.Length - 1);
             List<string> partedPostContents = new List<string>();
             int a = (int)Math.Floor((decimal)(postContent.Split(',').Length / 300));
-            for (int i = 0; i < a; i++) 
-            { 
+            if (a >= 1)
+            {
+                for (int i = 0; i < a; i++)
+                {
+                    var b = "ids=";
+                    if (i + 1 <= a)
+                    {
+                        for (int j = i * 300; j < (i + 1) * 300; j++)
+                        {
+                            b += postContent.Split(',')[j] + ",";
+                        }
+                        b = b.Substring(0, b.Length - 1);
+                    }
+                    else
+                    {
+                        for (int j = a * 300; j < postContent.Split(',').Length; j++)
+                        {
+                            b += postContent.Split(',')[j] + ",";
+                        }
+                        b = b.Substring(0, b.Length - 1);
+                    }
+                    partedPostContents.Add(@operator.Post("song/detail", b));
+                }
+            }
+            else 
+            {
                 var b = "ids=";
-                if (i + 1 < a)
+                for (int j = 0; j < postContent.Split(',').Length; j++)
                 {
-                    for (int j = i * 300; j < (i + 1) * 300; j++)
-                    {
-                        b += postContent.Split(',')[j] + ",";
-                    }
-                    b = b.Substring(0, b.Length - 1);
+                    b += postContent.Split(',')[j] + ",";
                 }
-                else 
-                {
-                    for (int j = a * 300; j < postContent.Split(',').Length; j++)
-                    {
-                        b += postContent.Split(',')[j] + ",";
-                    }
-                    b = b.Substring(0, b.Length - 1);
-                }
+                b = b.Substring(0, b.Length - 1);
                 partedPostContents.Add(@operator.Post("song/detail", b));
             }
 

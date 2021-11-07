@@ -13,6 +13,8 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <LangVersion>Default</LangVersion>
     <FileAlignment>512</FileAlignment>
+    <StartupObject>Setchin.NethardMusic.Program</StartupObject>
+    <ApplicationIcon>ahu8k-nhxwg-001.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -173,6 +175,9 @@
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ahu8k-nhxwg-001.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -67,7 +67,7 @@ namespace Setchin.NethardMusic
 
         public void InitializeLyric()
         {
-            var lyric = Song.GetLyric(Program.Operator, Song.Id);
+            var lyric = Song.GetLyric(Program.Operator, Song.Id); 
 
             lyricBox1.Initialize(lyric.Lyrics.Select(line => line.Content).ToArray());
             _lyricController.Initialize(lyric.Lyrics);
@@ -101,7 +101,7 @@ namespace Setchin.NethardMusic
             try
             {
                 _player.URL = "http://music.163.com/song/media/outer/url?id=" + Song.Id.ToString() + ".mp3";
-                InitializeLyric();
+                    InitializeLyric();
                 _player.controls.play();
                 timer1.Enabled = true;
                 _player.StatusChange += new _WMPOCXEvents_StatusChangeEventHandler(StatusChange);

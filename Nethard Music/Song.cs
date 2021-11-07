@@ -43,7 +43,10 @@ namespace Setchin.NethardMusic
             var dto = JsonConvert.DeserializeObject<LyricResponseDto>(content);
 
             if (dto.Lrc != null && dto.Lrc.Lyric != string.Empty)
-                return Lrc.FromText(dto.Lrc.Lyric);
+                try { return Lrc.FromText(dto.Lrc.Lyric); }
+                catch {
+                    return (Lrc.FromText("[00:00.00]" + dto.Lrc.Lyric.Replace('\n', ' ')));
+                }
             else 
             {
                 return Lrc.FromText("[00:00.00]该歌曲没有歌词");

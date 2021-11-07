@@ -20,18 +20,19 @@ namespace Setchin.NethardMusic
 
         private void LyricBox_Load(object sender, EventArgs e)
         {
-            panel1.Width = this.Width;
+            panel1.Width = 4000;
         }
 
         private void LyricBox_Resize(object sender, EventArgs e)
         {
-            panel1.Width = this.Width;
+            panel1.Width = 4000;
         }
 
         public void Initialize(string[] lyrics)
         {
             panel1.Controls.Clear();
             panel1.Top = 0;
+            _previousLyricIndex = 0;
             _lyricLabels.Clear();
             foreach (string lyric in lyrics)
             {
@@ -56,6 +57,11 @@ namespace Setchin.NethardMusic
             else
                 panel1.Top = 0;
             _previousLyricIndex = lyricIndex;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
