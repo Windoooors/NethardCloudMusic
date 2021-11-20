@@ -30,5 +30,20 @@ namespace Setchin.NethardMusic
             var settingsForm = new SettingsForm();
             settingsForm.ShowDialog();
         }
+
+        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void passwordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

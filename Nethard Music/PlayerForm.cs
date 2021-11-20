@@ -122,9 +122,6 @@ namespace Setchin.NethardMusic
 
         private void PlayerForm_Resize(object sender, EventArgs e)
         {
-            songNameColumn.Width = (playlistListView.Width - 25) / 3;
-            musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
-            albumNameColumn.Width = (playlistListView.Width - 25) / 3;
             _player.settings.volume = 100;
             panel1.Width = this.Width - 29;
             tabControl1.Width = this.Width - 29;
@@ -136,6 +133,9 @@ namespace Setchin.NethardMusic
             playlistListView.Width = this.Width - 37;
             playlistListView.Height = this.Height - 286;
             lyricBox1.Size = playlistListView.Size;
+            songNameColumn.Width = (playlistListView.Width - 25) / 3;
+            musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
+            albumNameColumn.Width = (playlistListView.Width - 25) / 3;
         }
 
         private void StatusChange()

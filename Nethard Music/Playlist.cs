@@ -28,18 +28,30 @@ namespace Setchin.NethardMusic
 
         public bool HasData { get { return _hasData; } }
 
-        public static Playlist GetPlaylist(ApiOperator @operator, long id)
+        private PlaylistResponseDto firstDto;
+
+        public int loadedIdsCount;
+
+        public int loadableIdsCount;
+
+        private static Playlist GetPlaylist(ApiOperator @operator, long id, PlaylistResponseDto firstDto , int loadIdsIndex)
         {
-            string content = @operator.Get("playlist/detail", new { Id = id });
-            var firstDto = JsonConvert.DeserializeObject<PlaylistResponseDto>(content);
             string postContent = string.Empty;
 
             var tracks = new List<SonglistDto.TrackDto>();
 
+            int i = 0;
+
             foreach (var ids in firstDto.Playlist.TrackIds.Select(it => it.Id.ToString()).Slice(300))
             {
-                string result = @operator.Post("song/detail", new { Ids = string.Join(",", ids.ToArray()) });
-                tracks.AddRange(JsonConvert.DeserializeObject<SonglistDto>(result).Tracks);
+                string idsString = string.Join(",", ids.ToArray());
+
+                if (i == loadIdsIndex)
+                {
+                    string result = @operator.Get("song/detail", new { Ids = idsString });
+                    tracks.AddRange(JsonConvert.DeserializeObject<SonglistDto>(result).Tracks);
+                }
+                i++;
             }
 
             List<Song> songs = null;
@@ -59,12 +71,20 @@ namespace Setchin.NethardMusic
 
         public Playlist GetData(ApiOperator @operator)
         {
-            if (!_hasData)
+            if (firstDto == null)
             {
-                return GetPlaylist(@operator, Id);
+                string content = @operator.Get("playlist/detail", new { Id = Id });
+                firstDto = JsonConvert.DeserializeObject<PlaylistResponseDto>(content);
+                var count = firstDto.Playlist.TrackIds.Count();
+                loadableIdsCount = (count / 300) + (count % 300 == 0 ? 0 : 1);
             }
-
-            return this;
+            if (loadedIdsCount < loadableIdsCount)
+            {
+                loadedIdsCount++;
+                return GetPlaylist(@operator, Id, firstDto, loadedIdsCount - 1);
+            }
+            else
+                return null;
         }
 
         public override bool Equals(object obj)

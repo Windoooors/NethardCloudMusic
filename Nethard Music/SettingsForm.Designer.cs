@@ -41,6 +41,7 @@ namespace Setchin.NethardMusic
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(303, 21);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // okButton
             // 
@@ -64,6 +65,7 @@ namespace Setchin.NethardMusic
             // 
             // SettingsForm
             // 
+            this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(327, 94);
@@ -75,7 +77,7 @@ namespace Setchin.NethardMusic
             this.MaximizeBox = false;
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Settings";
+            this.Text = "设置";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

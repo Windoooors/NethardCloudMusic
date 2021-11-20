@@ -53,13 +53,13 @@ namespace Setchin.NethardMusic
 
         private void SearchForm_Resize(object sender, EventArgs e)
         {
+            playlistListView.Height = this.Height - 80;
+            playlistListView.Width = this.Width - 32;
             songNameColumn.Width = (playlistListView.Width - 25) / 3;
             musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
             albumNameColumn.Width = (playlistListView.Width - 25) / 3;
             searchButton.Left = this.Width - 20 - searchButton.Width;
             searchTextBox.Width = searchButton.Left - 20;
-            playlistListView.Height = this.Height - 80;
-            playlistListView.Width = this.Width - 32;
         }
     }
 }

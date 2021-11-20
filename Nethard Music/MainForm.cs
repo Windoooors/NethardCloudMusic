@@ -14,6 +14,7 @@ namespace Setchin.NethardMusic
         {
             var user = Program.Operator.User;
             userNameLabel.Text = "欢迎您，" + user.Nickname;
+            this.Text = user.Nickname + " 的用户主页";
 
             var playlists = User.GetPlaylists(Program.Operator, user.Id);
 
@@ -51,9 +52,9 @@ namespace Setchin.NethardMusic
 
         private void UserInformationForm_Resize(object sender, EventArgs e)
         {
-            playlistColumn.Width = playlistsListView.Width - 25;
             playlistsListView.Width = this.Width - 30;
             playlistsListView.Height = this.Height - 110;
+            playlistColumn.Width = playlistsListView.Width - 25;
         }
 
 

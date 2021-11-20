@@ -29,5 +29,10 @@ namespace Setchin.NethardMusic
         {
             textBox1.Text = Program.Operator.BaseUrl;
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

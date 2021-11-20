@@ -100,7 +100,7 @@ namespace Setchin.NethardMusic
             this.MinimumSize = new System.Drawing.Size(302, 367);
             this.Name = "SearchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search";
+            this.Text = "检索";
             this.Load += new System.EventHandler(this.SearchForm_Load);
             this.Resize += new System.EventHandler(this.SearchForm_Resize);
             this.ResumeLayout(false);

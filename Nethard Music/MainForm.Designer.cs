@@ -98,20 +98,20 @@
             this.搜索ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.操作ToolStripMenuItem.Name = "操作ToolStripMenuItem";
-            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.操作ToolStripMenuItem.Text = "操作";
             // 
             // 搜索ToolStripMenuItem
             // 
             this.搜索ToolStripMenuItem.Name = "搜索ToolStripMenuItem";
-            this.搜索ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.搜索ToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
             this.搜索ToolStripMenuItem.Text = "搜索";
             this.搜索ToolStripMenuItem.Click += new System.EventHandler(this.搜索ToolStripMenuItem_Click);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
@@ -129,7 +129,7 @@
             this.MinimumSize = new System.Drawing.Size(302, 367);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "You";
+            this.Text = "用户主页";
             this.Load += new System.EventHandler(this.UserInformationForm_Load);
             this.Resize += new System.EventHandler(this.UserInformationForm_Resize);
             this.menuStrip1.ResumeLayout(false);
