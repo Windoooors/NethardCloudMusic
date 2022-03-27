@@ -1,6 +1,11 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Setchin.NethardMusic
 {
@@ -8,6 +13,7 @@ namespace Setchin.NethardMusic
     {
         public static ApiOperator Operator;
         public static PlayerForm Player;
+        public static System.Drawing.Text.PrivateFontCollection PrivateFonts;
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -28,6 +34,9 @@ namespace Setchin.NethardMusic
             {
                 return;
             }
+
+            PrivateFonts = new System.Drawing.Text.PrivateFontCollection();
+            PrivateFonts.AddFontFile(Application.StartupPath + @"\resources\font.ttf");
 
             var mainForm = new MainForm();
             mainForm.Initialize();

@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using Setchin.NethardMusic.Collections;
 using WMPLib;
+using System.Net;
+using System.Web;
 
 namespace Setchin.NethardMusic
 {
@@ -59,8 +61,7 @@ namespace Setchin.NethardMusic
             }
 
             playlistListView.Items[_index].Selected = true;
-            artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
-            songTitleLabel.Text = playlistListView.Items[_index].Text;
+            songTitleLabel.Text = playlistListView.Items[_index].Text + " - " + playlistListView.Items[_index].SubItems[1].Text;
 
             InitializeSong();
         }
@@ -101,7 +102,7 @@ namespace Setchin.NethardMusic
             try
             {
                 _player.URL = "http://music.163.com/song/media/outer/url?id=" + Song.Id.ToString() + ".mp3";
-                    InitializeLyric();
+                InitializeLyric();
                 _player.controls.play();
                 timer1.Enabled = true;
                 _player.StatusChange += new _WMPOCXEvents_StatusChangeEventHandler(StatusChange);
@@ -110,32 +111,43 @@ namespace Setchin.NethardMusic
             {
                 MessageBox.Show("请检查网络设置");
             }
+            try
+            {
+                WebRequest webRequest = WebRequest.Create(Song.GetAlbumCover(Program.Operator, Song.Id));
+                albumCoverPictureBox.BackgroundImage = Image.FromStream(webRequest.GetResponse().GetResponseStream());
+            }
+            catch
+            {
+                albumCoverPictureBox.BackgroundImage = albumCoverPictureBox.InitialImage;
+            }
         }
 
         private void PlayerForm_Load(object sender, EventArgs e)
         {
+            tabControl1.Width = this.Width - 39;
+            tabControl1.Height = this.Height - 262;
+            playlistListView.Width = tabControl1.TabPages[0].Width;
+            playlistListView.Height = tabControl1.TabPages[0].Height;
             songNameColumn.Width = (playlistListView.Width - 25) / 3;
             musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
             albumNameColumn.Width = (playlistListView.Width - 25) / 3;
             _player.settings.volume = 100;
+            positionLabel.Font = new Font(Program.PrivateFonts.Families[0], positionLabel.Font.Size);
+            durationLabel.Font = new Font(Program.PrivateFonts.Families[0], durationLabel.Font.Size);
+            controlPanel.Left = (this.Width - controlPanel.Width - 8) / 2;
         }
 
         private void PlayerForm_Resize(object sender, EventArgs e)
         {
-            _player.settings.volume = 100;
-            panel1.Width = this.Width - 29;
-            tabControl1.Width = this.Width - 29;
-            tabControl1.Height = this.Height - 258;
-            progressTrackBar.Width = this.Width - 135;
-            volumeTrackBar.Left = this.Width - volumeTrackBar.Width - 12;
-            likeButton.Left = this.Width - likeButton.Width - 19;
-            modeButton.Left = likeButton.Left - 12 - modeButton.Width;
-            playlistListView.Width = this.Width - 37;
-            playlistListView.Height = this.Height - 286;
+            tabControl1.Width = this.Width - 39;
+            tabControl1.Height = this.Height - 262;
+            playlistListView.Width = tabControl1.TabPages[0].Width;
+            playlistListView.Height = tabControl1.TabPages[0].Height;
             lyricBox1.Size = playlistListView.Size;
             songNameColumn.Width = (playlistListView.Width - 25) / 3;
             musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
             albumNameColumn.Width = (playlistListView.Width - 25) / 3;
+            controlPanel.Left = (this.Width - controlPanel.Width - 8) / 2;
         }
 
         private void StatusChange()
@@ -144,8 +156,7 @@ namespace Setchin.NethardMusic
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            songTitleLabel.Text = playlistListView.SelectedItems[0].Text;
-            artistLabel.Text = artistLabel.Text = playlistListView.SelectedItems[0].SubItems[1].Text;
+            songTitleLabel.Text = playlistListView.SelectedItems[0].Text + " - " + playlistListView.SelectedItems[0].SubItems[1].Text;
             _index = playlistListView.SelectedItems[0].Index;
 
             InitializeSong();
@@ -233,9 +244,15 @@ namespace Setchin.NethardMusic
                 }
                 progressTrackBar.Maximum = (int)_player.currentMedia.duration;
                 if (_player.controls.currentPositionString != string.Empty)
-                    positionLabel.Text = _player.controls.currentPositionString + "/" + _player.currentMedia.durationString;
+                {
+                    positionLabel.Text = _player.controls.currentPositionString;
+                    durationLabel.Text = "/" + _player.currentMedia.durationString;
+                }
                 else
-                    positionLabel.Text = "00:00" + "/" + _player.currentMedia.durationString;
+                {
+                    positionLabel.Text = "00:00";
+                    durationLabel.Text = "/" + _player.currentMedia.durationString;
+                }
                 progressTrackBar.Value = (int)_player.controls.currentPosition;
                 positionLabel.Location = new Point((panel1.Width - positionLabel.Width) / 2, positionLabel.Location.Y);
                 if (songTitleLabel.Width <= panel1.Width)
@@ -247,20 +264,11 @@ namespace Setchin.NethardMusic
                     else
                         songTitleLabel.Location = new Point(panel1.Width, songTitleLabel.Location.Y);
                 }
-                if (artistLabel.Width <= panel1.Width)
-                    artistLabel.Location = new Point((panel1.Width - artistLabel.Width) / 2, artistLabel.Location.Y);
-                else
-                {
-                    if (artistLabel.Location.X >= 0 - artistLabel.Width)
-                        artistLabel.Location = new Point(artistLabel.Location.X - 10, artistLabel.Location.Y);
-                    else
-                        artistLabel.Location = new Point(panel1.Width, artistLabel.Location.Y);
-                }
             }
             catch
             {
-                positionLabel.Text = "NaN" + "/" + "NaN";
-                artistLabel.Location = new Point((panel1.Width - artistLabel.Width) / 2, artistLabel.Location.Y);
+                positionLabel.Text = "NaN";
+                durationLabel.Text = "/" + "NaN";
                 positionLabel.Location = new Point((panel1.Width - positionLabel.Width) / 2, positionLabel.Location.Y);
                 songTitleLabel.Location = new Point((panel1.Width - songTitleLabel.Width) / 2, songTitleLabel.Location.Y);
             }
@@ -311,8 +319,7 @@ namespace Setchin.NethardMusic
 
             if (_previousIndex != _index)
             {
-                artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
-                songTitleLabel.Text = playlistListView.Items[_index].Text;
+                songTitleLabel.Text = playlistListView.Items[_index].Text + " - " + playlistListView.Items[_index].SubItems[1].Text;
 
                 InitializeSong();
             }
@@ -326,14 +333,13 @@ namespace Setchin.NethardMusic
         {
             if (_index != 0)
             {
-                songTitleLabel.Text = playlistListView.Items[--_index].Text;
-                artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
+                songTitleLabel.Text = playlistListView.Items[--_index].Text + " - " + playlistListView.Items[_index].SubItems[1].Text;
+                
             }
             else
             {
                 _index = playlistListView.Items.Count - 1;
-                songTitleLabel.Text = playlistListView.Items[playlistListView.Items.Count - 1].Text;
-                artistLabel.Text = playlistListView.Items[playlistListView.Items.Count - 1].SubItems[1].Text;
+                songTitleLabel.Text = playlistListView.Items[playlistListView.Items.Count - 1].Text + " - " + playlistListView.Items[playlistListView.Items.Count - 1].SubItems[1].Text;
             }
 
             InitializeSong();
@@ -343,14 +349,12 @@ namespace Setchin.NethardMusic
         {
             if (_index != playlistListView.Items.Count - 1)
             {
-                songTitleLabel.Text = playlistListView.Items[++_index].Text;
-                artistLabel.Text = playlistListView.Items[_index].SubItems[1].Text;
+                songTitleLabel.Text = playlistListView.Items[++_index].Text + " - " + playlistListView.Items[_index].SubItems[1].Text;
             }
             else
             {
                 _index = 0;
-                songTitleLabel.Text = playlistListView.Items[0].Text;
-                artistLabel.Text = playlistListView.Items[0].SubItems[1].Text;
+                songTitleLabel.Text = playlistListView.Items[0].Text + " - " + playlistListView.Items[0].SubItems[1].Text;
             }
 
             InitializeSong();

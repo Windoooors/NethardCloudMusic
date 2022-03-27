@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using Kfstorm.LrcParser;
 using Newtonsoft.Json;
 using Setchin.NethardMusic.Collections;
@@ -30,11 +31,20 @@ namespace Setchin.NethardMusic
                 dto.Artists.Select(artist => new Artist(artist.Id, artist.Name)).ToArray(),
                 new Album(dto.Album.Id, dto.Album.Name)))
                 .ToArray();
+                
         }
 
         public static void Like(ApiOperator @operator, long id)
         {
             @operator.Get("like", new { Id = id });
+        }
+
+        public static Uri GetAlbumCover(ApiOperator @operator, long id) 
+        {
+            string content = @operator.Get("song/detail", new { Ids = id });
+            var dto = JsonConvert.DeserializeObject<AlbumCoverResponseDto>(content);
+
+            return new Uri(dto.Songs[0].Album.AlbumCover.Replace("https", "http"));
         }
 
         public static ILrc GetLyric(ApiOperator @operator, long id)
@@ -94,6 +104,24 @@ namespace Setchin.NethardMusic
 
                     [JsonProperty("album")]
                     public IdNameDto Album;
+                }
+            }
+        }
+
+        private class AlbumCoverResponseDto
+        {
+            [JsonProperty("songs")]
+            public SongDto[] Songs;
+
+            public class SongDto : IdNameDto
+            {
+                [JsonProperty("al")]
+                public AlbumDto Album;
+
+                public class AlbumDto
+                {
+                    [JsonProperty("picUrl")]
+                    public string AlbumCover;
                 }
             }
         }

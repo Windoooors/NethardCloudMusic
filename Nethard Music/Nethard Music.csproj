@@ -178,6 +178,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ahu8k-nhxwg-001.ico" />
+    <None Include="resources\empty.png" />
+    <None Include="resources\background.png" />
+    <None Include="resources\Sail.jpg" />
+    <None Include="resources\albumcover.png" />
+    <None Include="resources\font.TTF" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
