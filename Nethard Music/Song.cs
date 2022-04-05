@@ -47,6 +47,14 @@ namespace Setchin.NethardMusic
             return new Uri(dto.Songs[0].Album.AlbumCover.Replace("https", "http"));
         }
 
+        public static Uri GetUri(ApiOperator @operator, long id) 
+        {
+            string content = @operator.Get("song/url", new { Id = id });
+            var dto = JsonConvert.DeserializeObject<SongUrlResponseDto>(content);
+
+            return dto.Datas[0].Uri;
+        }
+
         public static ILrc GetLyric(ApiOperator @operator, long id)
         {
             string content = @operator.Get("lyric", new { Id = id });
@@ -123,6 +131,18 @@ namespace Setchin.NethardMusic
                     [JsonProperty("picUrl")]
                     public string AlbumCover;
                 }
+            }
+        }
+
+        private class SongUrlResponseDto
+        {
+            [JsonProperty("data")]
+            public SongUrlDto[] Datas;
+
+            public class SongUrlDto : IdNameDto
+            {
+                [JsonProperty("url")]
+                public Uri Uri;
             }
         }
 

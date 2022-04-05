@@ -52,7 +52,7 @@ namespace Setchin.NethardMusic
 
         private void UserInformationForm_Resize(object sender, EventArgs e)
         {
-            playlistsListView.Width = this.Width - 30;
+            playlistsListView.Width = this.Width - 32;
             playlistsListView.Height = this.Height - 110;
             playlistColumn.Width = playlistsListView.Width - 25;
         }

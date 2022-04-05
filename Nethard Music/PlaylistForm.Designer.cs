@@ -65,7 +65,7 @@ namespace Setchin.NethardMusic
             this.playlistListView.Location = new System.Drawing.Point(12, 58);
             this.playlistListView.MultiSelect = false;
             this.playlistListView.Name = "playlistListView";
-            this.playlistListView.Size = new System.Drawing.Size(270, 270);
+            this.playlistListView.Size = new System.Drawing.Size(270, 277);
             this.playlistListView.TabIndex = 1;
             this.playlistListView.UseCompatibleStateImageBehavior = false;
             this.playlistListView.View = System.Windows.Forms.View.Details;
@@ -106,20 +106,20 @@ namespace Setchin.NethardMusic
             this.载入所有歌曲ToolStripMenuItem,
             this.LoadedMonitorToolStripMenuItem});
             this.操作ToolStripMenuItem.Name = "操作ToolStripMenuItem";
-            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.操作ToolStripMenuItem.Text = "操作";
             // 
             // 载入下一部分歌曲ToolStripMenuItem
             // 
             this.载入下一部分歌曲ToolStripMenuItem.Name = "载入下一部分歌曲ToolStripMenuItem";
-            this.载入下一部分歌曲ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.载入下一部分歌曲ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.载入下一部分歌曲ToolStripMenuItem.Text = "载入下一部分歌曲";
             this.载入下一部分歌曲ToolStripMenuItem.Click += new System.EventHandler(this.载入下一部分歌曲ToolStripMenuItem_Click_1);
             // 
             // 载入所有歌曲ToolStripMenuItem
             // 
             this.载入所有歌曲ToolStripMenuItem.Name = "载入所有歌曲ToolStripMenuItem";
-            this.载入所有歌曲ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.载入所有歌曲ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.载入所有歌曲ToolStripMenuItem.Text = "载入所有歌曲";
             this.载入所有歌曲ToolStripMenuItem.Click += new System.EventHandler(this.载入所有歌曲ToolStripMenuItem_Click);
             // 
@@ -127,20 +127,20 @@ namespace Setchin.NethardMusic
             // 
             this.LoadedMonitorToolStripMenuItem.Enabled = false;
             this.LoadedMonitorToolStripMenuItem.Name = "LoadedMonitorToolStripMenuItem";
-            this.LoadedMonitorToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.LoadedMonitorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.LoadedMonitorToolStripMenuItem.Text = "已载入";
             // 
             // PlaylistForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 340);
+            this.ClientSize = new System.Drawing.Size(294, 347);
             this.Controls.Add(this.playlistListView);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(302, 367);
+            this.MinimumSize = new System.Drawing.Size(302, 374);
             this.Name = "PlaylistForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "播放列表";

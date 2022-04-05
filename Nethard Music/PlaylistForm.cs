@@ -22,7 +22,7 @@ namespace Setchin.NethardMusic
 
         private void PlaylistForm_Resize(object sender, EventArgs e)
         {
-            playlistListView.Width = this.Width - 30;
+            playlistListView.Width = this.Width - 32;
             playlistListView.Height = this.Height - 97;
             songNameColumn.Width = (playlistListView.Width - 25) / 3;
             musicianNameColumn.Width = (playlistListView.Width - 25) / 3;

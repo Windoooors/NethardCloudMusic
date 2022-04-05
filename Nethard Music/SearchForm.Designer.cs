@@ -84,7 +84,7 @@ namespace Setchin.NethardMusic
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(72, 23);
             this.searchButton.TabIndex = 2;
-            this.searchButton.Text = "Search";
+            this.searchButton.Text = "检索";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 

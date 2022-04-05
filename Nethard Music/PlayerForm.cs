@@ -68,7 +68,7 @@ namespace Setchin.NethardMusic
 
         public void InitializeLyric()
         {
-            var lyric = Song.GetLyric(Program.Operator, Song.Id); 
+            var lyric = Song.GetLyric(Program.Operator, Song.Id);
 
             lyricBox1.Initialize(lyric.Lyrics.Select(line => line.Content).ToArray());
             _lyricController.Initialize(lyric.Lyrics);
@@ -124,10 +124,10 @@ namespace Setchin.NethardMusic
 
         private void PlayerForm_Load(object sender, EventArgs e)
         {
-            tabControl1.Width = this.Width - 39;
-            tabControl1.Height = this.Height - 262;
-            playlistListView.Width = tabControl1.TabPages[0].Width;
-            playlistListView.Height = tabControl1.TabPages[0].Height;
+            tabControl1.Width = this.Width - 34;
+            tabControl1.Height = this.Height - 248;
+            playlistListView.Width = tabControl1.TabPages[0].Width - 2;
+            playlistListView.Height = tabControl1.TabPages[0].Height - 3;
             songNameColumn.Width = (playlistListView.Width - 25) / 3;
             musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
             albumNameColumn.Width = (playlistListView.Width - 25) / 3;
@@ -139,10 +139,10 @@ namespace Setchin.NethardMusic
 
         private void PlayerForm_Resize(object sender, EventArgs e)
         {
-            tabControl1.Width = this.Width - 39;
-            tabControl1.Height = this.Height - 262;
-            playlistListView.Width = tabControl1.TabPages[0].Width;
-            playlistListView.Height = tabControl1.TabPages[0].Height;
+            tabControl1.Width = this.Width - 34;
+            tabControl1.Height = this.Height - 248;
+            playlistListView.Width = tabControl1.TabPages[0].Width - 2;
+            playlistListView.Height = tabControl1.TabPages[0].Height - 3;
             lyricBox1.Size = playlistListView.Size;
             songNameColumn.Width = (playlistListView.Width - 25) / 3;
             musicianNameColumn.Width = (playlistListView.Width - 25) / 3;
@@ -334,7 +334,7 @@ namespace Setchin.NethardMusic
             if (_index != 0)
             {
                 songTitleLabel.Text = playlistListView.Items[--_index].Text + " - " + playlistListView.Items[_index].SubItems[1].Text;
-                
+
             }
             else
             {

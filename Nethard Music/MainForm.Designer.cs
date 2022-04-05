@@ -61,7 +61,7 @@
             this.playlistsListView.Location = new System.Drawing.Point(12, 71);
             this.playlistsListView.MultiSelect = false;
             this.playlistsListView.Name = "playlistsListView";
-            this.playlistsListView.Size = new System.Drawing.Size(270, 257);
+            this.playlistsListView.Size = new System.Drawing.Size(270, 264);
             this.playlistsListView.TabIndex = 2;
             this.playlistsListView.UseCompatibleStateImageBehavior = false;
             this.playlistsListView.View = System.Windows.Forms.View.Details;
@@ -98,20 +98,20 @@
             this.搜索ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.操作ToolStripMenuItem.Name = "操作ToolStripMenuItem";
-            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.操作ToolStripMenuItem.Text = "操作";
             // 
             // 搜索ToolStripMenuItem
             // 
             this.搜索ToolStripMenuItem.Name = "搜索ToolStripMenuItem";
-            this.搜索ToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.搜索ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.搜索ToolStripMenuItem.Text = "搜索";
             this.搜索ToolStripMenuItem.Click += new System.EventHandler(this.搜索ToolStripMenuItem_Click);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
@@ -119,14 +119,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 340);
+            this.ClientSize = new System.Drawing.Size(294, 347);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.playlistsListView);
             this.Controls.Add(this.userNameLabel);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(302, 367);
+            this.MinimumSize = new System.Drawing.Size(302, 374);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "用户主页";
