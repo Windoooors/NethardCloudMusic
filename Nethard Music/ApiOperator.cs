@@ -112,19 +112,6 @@ namespace Setchin.NethardMusic
             return builder.ToString();
         }
 
-        public Stream GetAudioStream(string url) 
-        {
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.CookieContainer = _cookie;
-            request.Method = "GET";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.UserAgent = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0;)";
-
-            var response = (HttpWebResponse)request.GetResponse();
-
-            return response.GetResponseStream();
-        }
-
         private string PostCore(string url, string content)
         {
             var request = (HttpWebRequest)WebRequest.Create(url);

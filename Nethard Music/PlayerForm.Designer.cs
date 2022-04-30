@@ -47,6 +47,7 @@ namespace Setchin.NethardMusic
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lyricBox1 = new Setchin.NethardMusic.LyricBox();
             this.controlPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.progressTrackBar = new System.Windows.Forms.TrackBar();
@@ -56,7 +57,6 @@ namespace Setchin.NethardMusic
             this.prevButton = new System.Windows.Forms.Button();
             this.nextButton = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.lyricBox1 = new Setchin.NethardMusic.LyricBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.volumeTrackBar)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -183,7 +183,7 @@ namespace Setchin.NethardMusic
             this.volumeTrackBar.Location = new System.Drawing.Point(273, 0);
             this.volumeTrackBar.Maximum = 100;
             this.volumeTrackBar.Name = "volumeTrackBar";
-            this.volumeTrackBar.Size = new System.Drawing.Size(66, 45);
+            this.volumeTrackBar.Size = new System.Drawing.Size(66, 42);
             this.volumeTrackBar.TabIndex = 9;
             this.volumeTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.volumeTrackBar.Value = 100;
@@ -216,10 +216,20 @@ namespace Setchin.NethardMusic
             this.tabPage2.Location = new System.Drawing.Point(4, 21);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(378, 302);
+            this.tabPage2.Size = new System.Drawing.Size(378, 309);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "歌词";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lyricBox1
+            // 
+            this.lyricBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lyricBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lyricBox1.Location = new System.Drawing.Point(0, 3);
+            this.lyricBox1.Name = "lyricBox1";
+            this.lyricBox1.Size = new System.Drawing.Size(373, 298);
+            this.lyricBox1.TabIndex = 11;
+            this.lyricBox1.Load += new System.EventHandler(this.lyricBox1_Load);
             // 
             // controlPanel
             // 
@@ -252,9 +262,13 @@ namespace Setchin.NethardMusic
             // 
             this.progressTrackBar.Location = new System.Drawing.Point(0, 0);
             this.progressTrackBar.Name = "progressTrackBar";
-            this.progressTrackBar.Size = new System.Drawing.Size(278, 45);
+            this.progressTrackBar.Size = new System.Drawing.Size(278, 42);
             this.progressTrackBar.TabIndex = 10;
             this.progressTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.progressTrackBar.Scroll += new System.EventHandler(this.progressTrackBar_Scroll);
+            this.progressTrackBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.progressTrackBar_MouseDown);
+            this.progressTrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.progressTrackBar_MouseUp);
+            this.progressTrackBar.ValueChanged += new System.EventHandler(this.progressTrackBar_ValueChanged);
             // 
             // albumCoverPictureBox
             // 
@@ -263,9 +277,9 @@ namespace Setchin.NethardMusic
             this.albumCoverPictureBox.ErrorImage = global::Setchin.NethardMusic.Properties.Resources.empty;
             this.albumCoverPictureBox.Image = global::Setchin.NethardMusic.Properties.Resources.albumcover1;
             this.albumCoverPictureBox.InitialImage = global::Setchin.NethardMusic.Properties.Resources.empty;
-            this.albumCoverPictureBox.Location = new System.Drawing.Point(11, 82);
+            this.albumCoverPictureBox.Location = new System.Drawing.Point(11, 77);
             this.albumCoverPictureBox.Name = "albumCoverPictureBox";
-            this.albumCoverPictureBox.Size = new System.Drawing.Size(64, 59);
+            this.albumCoverPictureBox.Size = new System.Drawing.Size(64, 64);
             this.albumCoverPictureBox.TabIndex = 13;
             this.albumCoverPictureBox.TabStop = false;
             // 
@@ -326,16 +340,6 @@ namespace Setchin.NethardMusic
             this.pictureBox2.Size = new System.Drawing.Size(384, 186);
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
-            // 
-            // lyricBox1
-            // 
-            this.lyricBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lyricBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lyricBox1.Location = new System.Drawing.Point(0, 3);
-            this.lyricBox1.Name = "lyricBox1";
-            this.lyricBox1.Size = new System.Drawing.Size(373, 298);
-            this.lyricBox1.TabIndex = 11;
-            this.lyricBox1.Load += new System.EventHandler(this.lyricBox1_Load);
             // 
             // PlayerForm
             // 
