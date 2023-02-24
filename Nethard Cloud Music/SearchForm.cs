@@ -35,7 +35,7 @@ namespace Setchin.NethardCloudMusic
 
             }
             else
-                MessageBox.Show("搜了个寂寞");
+                MessageBox.Show("请输入关键词");
         }
 
         private void listView1_DoubleClick(object sender, EventArgs e)

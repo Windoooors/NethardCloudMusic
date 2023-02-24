@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Setchin.NethardCloudMusic
@@ -76,6 +77,12 @@ namespace Setchin.NethardCloudMusic
 
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Application.Exit();
+        }
+
+        private void 登出并退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            File.Delete(Application.StartupPath + @"\cookie.conf");
             Application.Exit();
         }
     }

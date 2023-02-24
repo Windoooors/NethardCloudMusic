@@ -31,12 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.userNameLabel = new System.Windows.Forms.Label();
             this.playlistsListView = new System.Windows.Forms.ListView();
-            this.playlistColumn = new System.Windows.Forms.ColumnHeader();
+            this.playlistColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.操作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.搜索ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.登出并退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,7 +97,8 @@
             // 
             this.操作ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.搜索ToolStripMenuItem,
-            this.退出ToolStripMenuItem});
+            this.退出ToolStripMenuItem,
+            this.登出并退出ToolStripMenuItem});
             this.操作ToolStripMenuItem.Name = "操作ToolStripMenuItem";
             this.操作ToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.操作ToolStripMenuItem.Text = "操作";
@@ -104,22 +106,29 @@
             // 搜索ToolStripMenuItem
             // 
             this.搜索ToolStripMenuItem.Name = "搜索ToolStripMenuItem";
-            this.搜索ToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.搜索ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.搜索ToolStripMenuItem.Text = "搜索";
             this.搜索ToolStripMenuItem.Click += new System.EventHandler(this.搜索ToolStripMenuItem_Click);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
+            // 
+            // 登出并退出ToolStripMenuItem
+            // 
+            this.登出并退出ToolStripMenuItem.Name = "登出并退出ToolStripMenuItem";
+            this.登出并退出ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.登出并退出ToolStripMenuItem.Text = "登出并退出";
+            this.登出并退出ToolStripMenuItem.Click += new System.EventHandler(this.登出并退出ToolStripMenuItem_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 347);
+            this.ClientSize = new System.Drawing.Size(294, 354);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.playlistsListView);
             this.Controls.Add(this.userNameLabel);
@@ -149,5 +158,6 @@
         private System.Windows.Forms.ToolStripMenuItem 操作ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 搜索ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 登出并退出ToolStripMenuItem;
     }
 }

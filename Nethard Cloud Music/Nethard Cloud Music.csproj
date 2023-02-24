@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,8 +15,8 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>Setchin.NethardCloudMusic.Program</StartupObject>
     <ApplicationIcon>ahu8k-nhxwg-001.ico</ApplicationIcon>
-    <ManifestCertificateThumbprint>D2CF159DFC52362D8C5032D871B63EFAC29D5448</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Nethard Music_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>8DC03432605679316E6719E713436F3A51506B3B</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Nethard Cloud Music_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
@@ -37,6 +37,11 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,15 +63,15 @@
   <ItemGroup>
     <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\My Documents\AxInterop.WMPLib.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\1.0.1\Release\AxInterop.WMPLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\My Documents\Interop.WMPLib.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\1.0.1\Release\Interop.WMPLib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\My Documents\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\1.0.1\Release\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -160,6 +165,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Nethard Cloud Music_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -203,7 +209,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ahu8k-nhxwg-001.ico" />
-    <None Include="Nethard Music_TemporaryKey.pfx" />
     <None Include="resources\empty.png" />
     <None Include="resources\background.png" />
     <None Include="resources\Sail.jpg" />

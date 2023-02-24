@@ -9,20 +9,93 @@ namespace Setchin.NethardCloudMusic
 {
     public partial class ApiOperator
     {
-        public User Login(string number, string password)
+        public User PhoneLogin(string number, string password)
         {
             string md5Password = Md5Computing.Compute(password);
 
             string content = Get("login/cellphone", new { Phone = number, Md5Password = md5Password });
             var dto = JsonConvert.DeserializeObject<UserDto>(content);
 
-            return _user = new User(dto.Profile.UserId, dto.Profile.Nickname);
+            return _user = new User(dto.Data.Profile.UserId, dto.Data.Profile.Nickname);
+        }
+
+        public User QrCodeLogin(string key)
+        {
+            string checkContent = Post("login/qr/check", new { Key = key });
+            var stateDto = JsonConvert.DeserializeObject<QrCodeLoginStateDto>(checkContent);
+
+            if (stateDto.Code == 803)
+            {
+                //_cookie = new CookieContainer().Add();
+                string content = Post("login/status", new { });
+                var dto = JsonConvert.DeserializeObject<UserDto>(content);
+                return _user = new User(dto.Data.Profile.UserId, dto.Data.Profile.Nickname);
+            }
+            else
+                return null;
+        }
+
+        public User AutoLogin()
+        {
+            try
+            {
+                //_cookie = new CookieContainer().Add();
+                string content = Post("login/status", new { });
+                var dto = JsonConvert.DeserializeObject<UserDto>(content);
+                return _user = new User(dto.Data.Profile.UserId, dto.Data.Profile.Nickname);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public string GetLoginQrCode(string key)
+        {
+            string content = Get("login/qr/create", new { Key = key, qrimg = true});
+            return JsonConvert.DeserializeObject<LoginQrCodeDto>(content).Data.QrImage;
+        }
+
+        public string GetLoginQrCodeKey()
+        {
+            string content = Get("login/qr/key", new { });
+            return JsonConvert.DeserializeObject<LoginQrCodeKeyDto>(content).Data.Key;
+        }
+
+        private class LoginQrCodeDto
+        {
+            [JsonProperty("data")]
+            public DataDto Data;
+
+            public class DataDto
+            {
+                [JsonProperty("qrimg")]
+                public string QrImage;
+            }
+        }
+
+        private class LoginQrCodeKeyDto
+        {
+            [JsonProperty("data")]
+            public DataDto Data;
+
+            public class DataDto
+            {
+                [JsonProperty("unikey")]
+                public string Key;
+            }
         }
 
         private class UserDto
         {
-            [JsonProperty("profile")]
-            public ProfileInfo Profile;
+            [JsonProperty("data")]
+            public DataDto Data;
+
+            public class DataDto
+            {
+                [JsonProperty("profile")]
+                public ProfileInfo Profile;
+            }
 
             public class ProfileInfo
             {
@@ -32,6 +105,15 @@ namespace Setchin.NethardCloudMusic
                 [JsonProperty("userId")]
                 public long UserId;
             }
+        }
+
+        private class QrCodeLoginStateDto
+        {
+            [JsonProperty("code")]
+            public int Code;
+
+            [JsonProperty("cookie")]
+            public string Cookie;
         }
     }
 
@@ -43,14 +125,19 @@ namespace Setchin.NethardCloudMusic
         private User _user;
 
         public string BaseUrl { get { return _baseUrl; } }
+        public CookieContainer Cookie { get { return _cookie; } }
 
         public User User { get { return _user; } }
 
-        public ApiOperator(string baseUrl)
+        public ApiOperator(string baseUrl, CookieContainer cookie)
         {
             if (baseUrl == null)
             {
                 throw new ArgumentNullException("baseUrl");
+            }
+            if (cookie != null)
+            {
+                _cookie = cookie;
             }
 
             _baseUrl = baseUrl;

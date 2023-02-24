@@ -15,12 +15,12 @@ namespace Setchin.NethardCloudMusic
         {
             if (textBox1.Text == string.Empty)
             {
-                MessageBox.Show("改了个寂寞");
+                MessageBox.Show("设置值不能为空");
             }
             else
             {
                 File.WriteAllText(Application.StartupPath + @"\config.conf", textBox1.Text);
-                Program.Operator = new ApiOperator(textBox1.Text);
+                Program.Operator = new ApiOperator(textBox1.Text, Program.Operator.Cookie);
                 Close();
             }
         }
